@@ -27,7 +27,7 @@ module.exports = {
         manager[prop] = req.body[prop];
       }
 
-      // save the movie
+      // return edited manager object to database
       manager.save(function(err) {
         if (err) {
           res.json(err);
