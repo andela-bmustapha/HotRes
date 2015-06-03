@@ -1,4 +1,4 @@
-var Hotel = require('../models/hotel.model');
+var Manager = require('../models/manager.model');
 
 module.exports = {
   getManagers: function(req, res){
