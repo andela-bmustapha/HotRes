@@ -2,6 +2,12 @@
 var Hotel = require('../models/hotel.model');
 
 module.exports = {
+  /**
+   * [getHotels description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   // api call function to get all hotels stored in database
   getHotels: function(req, res){
     Hotel.find(function(err, hotels){
@@ -11,6 +17,11 @@ module.exports = {
       res.json(hotels);
     });
   },
+  /**
+   * [addHotel description]
+   * @param {[req]}
+   * @param {[res]}
+   */
   // api call function to add hotel profile to database
   addHotel: function(req, res) {
     var hotel = new Hotel(req.body);
@@ -21,6 +32,12 @@ module.exports = {
       res.send({message:'Hotel Added'});
     });
   },
+  /**
+   * [editHotel description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   // api call function to edit specific hotel based on provided id
   editHotel: function(req, res){
     // grab the specified hotel from database
@@ -41,6 +58,12 @@ module.exports = {
       });
     });
   },
+  /**
+   * [getSingleHotel description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   // api call function to grab specific hotel in database
   getSingleHotel: function(req, res){
     Hotel.findOne({_id:req.params.id},function(err, hotel) {
@@ -50,6 +73,12 @@ module.exports = {
       res.json(hotel);
     });
   },
+  /**
+   * [deleteHotel description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   // api call function to delete hotel profile from database based on specified id
   deleteHotel: function(req, res){
     Hotel.remove({

@@ -1,6 +1,12 @@
 var Manager = require('../models/manager.model');
 
 module.exports = {
+  /**
+   * [getManagers description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   getManagers: function(req, res){
     Manager.find(function(err, managers){
       if(err) {
@@ -9,6 +15,11 @@ module.exports = {
       res.json(managers);
     });
   },
+  /**
+   * [addManager description]
+   * @param {[req]}
+   * @param {[res]}
+   */
   addManager: function(req, res) {
     var manager = new Manager(req.body);
     manager.save(function(err) {
@@ -18,6 +29,12 @@ module.exports = {
       res.json({message:'Manager Added'});
     });
   },
+  /**
+   * [editManager description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   editManager: function(req, res){
     Manager.findOne({_id:req.params.id}, function(err, manager){
       if(err) {
@@ -36,6 +53,12 @@ module.exports = {
       });
     });
   },
+  /**
+   * [getSingleManager description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   getSingleManager: function(req, res){
     Manager.findOne({_id:req.params.id},function(err, manager) {
       if(err) {
@@ -44,6 +67,12 @@ module.exports = {
       res.json(hotel);
     });
   },
+  /**
+   * [deleteManager description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @return {[void]}
+   */
   deleteManager: function(req, res){
     Manager.remove({
       _id: req.params.id
