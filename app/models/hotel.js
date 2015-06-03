@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var hotelSchema = new Schema({
     name: String,
-    location: String,
+    managerId: String,
+    location: [{ state: String, city: String }],
     rating: String,
     numberOfRooms: Number,
     available: Boolean
