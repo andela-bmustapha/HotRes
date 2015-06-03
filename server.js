@@ -13,10 +13,9 @@ app.set('port', process.env.PORT || 8000);
 //Ideally you will obtain DB details from a config file
 // var connectionString = 'mongodb://toystars:Rooney1990@ds043002.mongolab.com:43002/nodesample'
 
-var dbName = 'HotRes';
-var connectionString='mongodb://localhost:27017/' + dbName;
+var database = require('./config/db')
 
-mongoose.connect(connectionString);
+mongoose.connect(database.url);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
