@@ -23,7 +23,7 @@ module.exports = {
     } else if (req.query.state) { // if only state is specified in query
       Hotel.find({state: req.query.state}, function(err, hotel) {
         if (hotel.length === 0) {
-          res.json({message: 'No hotel found in ' req.query.state});
+          res.json({message: 'No hotel found in ' + req.query.state});
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
