@@ -81,7 +81,6 @@ module.exports = {
         }
       });
     }
-    next();
   },
   /**
    * [addHotel description]
