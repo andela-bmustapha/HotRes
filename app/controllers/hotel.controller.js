@@ -64,7 +64,7 @@ module.exports = {
       });
     }
   },
-  getManagerHotels: function(err, res, next) {
+  getManagerHotels: function(req, res, next) {
     Hotel.find({managerId: req.params.id}, function(err, hotels) {
       if (err) {
         res.json({message: 'Error!'});
