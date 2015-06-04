@@ -9,9 +9,26 @@ module.exports = {
    * @return {[void]}
    *
    * api call function to get all hotels stored in database
-   * can also get hotels based on query search
+   * can also get hotels based on query search:
+   * location(state, city or both)
+   * manager_token(to return )
    */
   getHotels: function(req, res, next){
+    /**
+     * Hotel api controller for hotel search based on manager token
+     */
+    if (req.query.manager_token) {
+      Hotel.find({managerToken: req.query.manager_token}, function(err, hotel) {
+        if (hotel.length === 0) {
+          res.json({message: 'Manager currently manages no hotel.'})
+        } else if (hotel.length > 0) {
+          res.json(hotel);
+        }
+      });
+    }
+    /**
+     * Hotel api controller for hotel search based on location
+     */
     if (req.query.state && req.query.city) { // if both state and city are specified in query
       Hotel.find({state: req.query.state, city: req.query.city}, function(err, hotel) {
         if (hotel.length === 0) {
