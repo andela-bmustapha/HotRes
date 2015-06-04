@@ -10,10 +10,10 @@ module.exports = {
    */
   // api call function to get all hotels stored in database
   getHotels: function(req, res, next){
-    if (req.query.state) {
-      Hotel.find({state: req.query.state}, function(err, hotel) {
+    if (req.query.state && req.query.city) {
+      Hotel.find({state: req.query.state, city: req.query.city}, function(err, hotel) {
         if (hotel.length === 0) {
-          res.json({message: 'No hotel found in ' + req.query.state});
+          res.json({message: 'No hotel found in ' + req.query.city + ', ' + req.query.state});
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
