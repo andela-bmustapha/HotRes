@@ -7,7 +7,7 @@ module.exports = {
    * @param  {[res]}
    * @return {[void]}
    */
-  getManagers: function(req, res){
+  getManagers: function(req, res, next){
     Manager.find(function(err, managers){
       if(err) {
         res.json(err);
@@ -15,6 +15,7 @@ module.exports = {
       if (managers) {
         res.json(managers);
       }
+      next();
     });
   },
   /**
@@ -22,14 +23,16 @@ module.exports = {
    * @param {[req]}
    * @param {[res]}
    */
-  addManager: function(req, res) {
+  addManager: function(req, res, next) {
     var manager = new Manager(req.body);
+    manager.token = 'sample Token'; // token to be generated later
     manager.save(function(err) {
       if(err) {
         res.json(err);
       } else {
         res.json({message:'Manager Added'});
       }
+      next();
     });
   },
   /**
@@ -38,7 +41,7 @@ module.exports = {
    * @param  {[res]}
    * @return {[void]}
    */
-  editManager: function(req, res){
+  editManager: function(req, res, next){
     Manager.findOne({_id:req.params.id}, function(err, manager){
       if(err) {
         res.json(err);
@@ -55,6 +58,7 @@ module.exports = {
           }
         });
       }
+      next();
     });
   },
   /**
@@ -63,7 +67,7 @@ module.exports = {
    * @param  {[res]}
    * @return {[void]}
    */
-  getSingleManager: function(req, res){
+  getSingleManager: function(req, res, next){
     Manager.findOne({_id:req.params.id},function(err, manager) {
       if(err) {
         res.json({message: 'Manager not found!'});
@@ -71,6 +75,7 @@ module.exports = {
       if (manager) {
         res.json(manager);
       }
+      next();
     });
   },
   /**
@@ -79,7 +84,7 @@ module.exports = {
    * @param  {[res]}
    * @return {[void]}
    */
-  deleteManager: function(req, res){
+  deleteManager: function(req, res, next){
     Manager.remove({
       _id: req.params.id
     }, function(err, manager) {
@@ -89,6 +94,33 @@ module.exports = {
       if (manager) {
         res.json({ message: 'Successfully deleted' });
       }
+      next()
+    });
+  },
+  /**
+   * [managerLogin description]
+   * @param  {[req]}
+   * @param  {[res]}
+   * @param  {Function}
+   * @return {[void]}
+   */
+  managerLogin: function(req, res, next) {
+    Manager.find({username: req.body.username}, function(err, manager) {
+      if (manager.length === 0) {
+        res.json({message: 'Username does not exist!'});
+      } else if (manager.length === 1) {
+        if (manager[0].password === req.body.password) {
+          // return formatted object
+          res.json({
+            name: manager[0].name,
+            username: manager[0].username,
+            token: manager[0].token
+          });
+        } else {
+          res.json({message: 'Password Incorrect!'});
+        }
+      }
+      next();
     });
   }
 }

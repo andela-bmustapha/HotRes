@@ -10,12 +10,12 @@ var Schema = mongoose.Schema;
 */
 var hotelSchema = new Schema({
     name: { type: String },
-    manager: { type: mongoose.Schema.Types.ObjectId, ref: 'Manager' },
+    managerID: { type: String },
     state: { type: String },
     city: { type: String },
     rating: { type: String },
     numberOfRooms: { type: Number },
-    available: { type: Boolean }
+    availableRooms: { type: Number },
 });
 
 module.exports = mongoose.model('Hotel', hotelSchema);
