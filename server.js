@@ -1,5 +1,7 @@
 // Load Our Modules
 
+require('dotenv').load();
+var secret = require('./config/secret');
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -13,9 +15,7 @@ app.set('port', process.env.PORT || 8000);
 //Ideally you will obtain DB details from a config file
 // var connectionString = 'mongodb://toystars:Rooney1990@ds043002.mongolab.com:43002/nodesample'
 
-var database = require('./config/db')
-
-mongoose.connect(database.url);
+mongoose.connect(secret.db);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
