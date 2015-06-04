@@ -11,10 +11,6 @@ var app = express();
 
 app.set('port', process.env.PORT || 8000);
 
-//connect to our database
-//Ideally you will obtain DB details from a config file
-// var connectionString = 'mongodb://toystars:Rooney1990@ds043002.mongolab.com:43002/nodesample'
-
 mongoose.connect(secret.db);
 
 app.use(bodyParser.json());
