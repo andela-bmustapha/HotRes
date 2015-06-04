@@ -12,8 +12,9 @@ module.exports = {
   getHotels: function(req, res, next){
     Hotel.find(function(err, hotels){
       if(err) {
-        return es.json(err);
+        return res.json(err);
       }
+      console.log(hotels)
       res.json(hotels);
       next();
     });
