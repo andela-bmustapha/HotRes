@@ -19,10 +19,15 @@ module.exports = {
      */
     if (req.query.manager_token) {
       Hotel.find({managerToken: req.query.manager_token}, function(err, hotel) {
-        if (hotel.length === 0) {
-          res.json({message: 'Manager currently manages no hotel.'})
-        } else if (hotel.length > 0) {
-          res.json(hotel);
+        if (err) {
+          res.json({message: 'Server Error!'});
+        }
+        if (hotel) {
+          if (hotel.length === 0) {
+            res.json({message: 'Manager currently manages no hotel.'})
+          } else if (hotel.length > 0) {
+            res.json(hotel);
+          }
         }
         next();
       });
