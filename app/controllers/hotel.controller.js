@@ -20,11 +20,11 @@ module.exports = {
     if (req.query.manager_token) {
       Hotel.find({managerToken: req.query.manager_token}, function(err, hotel) {
         if (err) {
-          res.json({message: 'Server Error!'});
+          return res.json({message: 'Server Error!'});
         }
         if (hotel) {
           if (hotel.length === 0) {
-            res.json({message: 'Manager currently manages no hotel.'})
+            return res.json({message: 'Manager currently manages no hotel.'})
           } else if (hotel.length > 0) {
             res.json(hotel);
           }
@@ -37,24 +37,37 @@ module.exports = {
      */
     if (req.query.state && req.query.city) { // if both state and city are specified in query
       Hotel.find({state: req.query.state, city: req.query.city}, function(err, hotel) {
-        if (hotel.length === 0) {
-          res.json({message: 'No hotel found in ' + req.query.city + ', ' + req.query.state});
-        } else if (hotel.length > 0) {
-          res.json(hotel);
+        if (err) {
+          return res.json({message: 'Error!'});
+        }
+        if (hotel) {
+          if (hotel.length === 0) {
+            return res.json({message: 'No hotel found in ' + req.query.city + ', ' + req.query.state});
+          } else if (hotel.length > 0) {
+            res.json(hotel);
+          }
         }
         next();
       });
     } else if (req.query.state) { // if only state is specified in query
       Hotel.find({state: req.query.state}, function(err, hotel) {
-        if (hotel.length === 0) {
-          res.json({message: 'No hotel found in ' + req.query.state});
-        } else if (hotel.length > 0) {
-          res.json(hotel);
+        if (err) {
+          return res.json({message: 'Error!'});
+        }
+        if (hotel) {
+          if (hotel.length === 0) {
+            return res.json({message: 'No hotel found in ' + req.query.state});
+          } else if (hotel.length > 0) {
+            res.json(hotel);
+          }
         }
         next();
       });
     } else if (req.query.city) { // if only city is specified in query
       Hotel.find({city: req.query.city}, function(err, hotel) {
+        if (err) {
+          return res.json({message: 'Error!'});
+        }
         if (hotel.length === 0) {
           res.json({message: 'No hotel found in ' + req.query.city});
         } else if (hotel.length > 0) {
@@ -70,7 +83,7 @@ module.exports = {
         if (hotels) {
           res.json(hotels);
         }
-        // next();
+        next();
       });
     }
   },
