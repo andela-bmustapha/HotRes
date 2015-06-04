@@ -16,7 +16,7 @@ module.exports = {
   getHotels: function(req, res, next){
     /**
      * Hotel api controller for hotel search based on manager token
-     *
+    */
     if (req.query.manager_token) {
       Hotel.find({managerToken: req.query.manager_token}, function(err, hotel) {
         if (err) {
@@ -31,7 +31,6 @@ module.exports = {
         }
       });
     }
-    */
     /**
      * Hotel api controller for hotel search based on location
      */
