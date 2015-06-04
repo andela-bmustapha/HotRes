@@ -10,7 +10,7 @@ var Schema = mongoose.Schema;
 */
 var hotelSchema = new Schema({
     name: { type: String },
-    managerToken: { type: String },
+    managerId: { type: String },
     state: { type: String },
     city: { type: String },
     rating: { type: String },

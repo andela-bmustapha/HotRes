@@ -11,28 +11,8 @@ module.exports = {
    * api call function to get all hotels stored in database
    * can also get hotels based on query search:
    * location(state, city or both)
-   * manager_token(to return )
    */
   getHotels: function(req, res, next){
-    /**
-     * Hotel api controller for hotel search based on manager token
-    */
-    token = req.headers['x-manager-token'];
-
-    if (token) {
-      Hotel.find({managerToken: token}, function(err, hotel) {
-        if (err) {
-          res.json({message: 'Server Error!'});
-        }
-        if (hotel) {
-          if (hotel.length === 0) {
-            res.json({message: 'Manager currently manages no hotel.'})
-          } else if (hotel.length > 0) {
-            res.json(hotel);
-          }
-        }
-      });
-    }
     /**
      * Hotel api controller for hotel search based on location
      */
@@ -84,6 +64,21 @@ module.exports = {
       });
     }
   },
+  getManagerHotels: function(err, res, next) {
+    Hotel.find({managerId: req.params.id}, function(err, hotels) {
+      if (err) {
+        res.json({message: 'Error!'});
+      }
+      if (hotels) {
+        if (hotels.length === 0) {
+          res.json({message: 'Manager currently manages no hotel.'});
+        } else if (hotels.length > 0) {
+          res.json(hotels);
+        }
+      }
+      next();
+    });
+  },
   /**
    * [addHotel description]
    * @param {[req]}
@@ -109,7 +104,7 @@ module.exports = {
   // api call function to edit specific hotel based on provided id
   editHotel: function(req, res, next){
     // grab the specified hotel from database
-    Hotel.findOne({_id:req.params.id}, function(err, hotel){
+    Hotel.findOne({_id: req.params.id}, function(err, hotel){
       if(err) {
         res.json(err);
       } else {

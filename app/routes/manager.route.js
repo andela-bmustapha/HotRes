@@ -17,5 +17,4 @@ module.exports = function(router){
 
   router.route('/managers/login')
     .post(Managers.managerLogin);
-
 };
