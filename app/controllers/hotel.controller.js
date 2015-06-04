@@ -56,7 +56,7 @@ module.exports = {
     } else { // pull all hotels in database
       Hotel.find(function(err, hotels){
         if(err) {
-          return res.json(err);
+          res.json(err);
         }
         if (hotels) {
           res.json(hotels);
