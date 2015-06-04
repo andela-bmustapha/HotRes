@@ -17,17 +17,18 @@ module.exports = {
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
-        return;
+      });
+    } else {
+      Hotel.find(function(err, hotels){
+        if(err) {
+          return res.json(err);
+        }
+        if (hotels) {
+          res.json(hotels);
+        }
+        next();
       });
     }
-    Hotel.find(function(err, hotels){
-      if(err) {
-        return res.json(err);
-      }
-      console.log(hotels)
-      res.json(hotels);
-      next();
-    });
   },
   /**
    * [addHotel description]
