@@ -7,10 +7,12 @@ module.exports = {
    * @param  {[req]}
    * @param  {[res]}
    * @return {[void]}
+   *
+   * api call function to get all hotels stored in database
+   * can also get hotels based on query search
    */
-  // api call function to get all hotels stored in database
   getHotels: function(req, res, next){
-    if (req.query.state && req.query.city) {
+    if (req.query.state && req.query.city) { // if both state and city are specified in query
       Hotel.find({state: req.query.state, city: req.query.city}, function(err, hotel) {
         if (hotel.length === 0) {
           res.json({message: 'No hotel found in ' + req.query.city + ', ' + req.query.state});
@@ -18,7 +20,23 @@ module.exports = {
           res.json(hotel);
         }
       });
-    } else {
+    } else if (req.query.state) { // if only state is specified in query
+      Hotel.find({state: req.query.state}, function(err, hotel) {
+        if (hotel.length === 0) {
+          res.json({message: 'No hotel found in ' req.query.state});
+        } else if (hotel.length > 0) {
+          res.json(hotel);
+        }
+      });
+    } else if (req.query.city) { // if only city is specified in query
+      Hotel.find({city: req.query.city}, function(err, hotel) {
+        if (hotel.length === 0) {
+          res.json({message: 'No hotel found in ' + req.query.city});
+        } else if (hotel.length > 0) {
+          res.json(hotel);
+        }
+      });
+    } else { // pull all hotels in database
       Hotel.find(function(err, hotels){
         if(err) {
           return res.json(err);
