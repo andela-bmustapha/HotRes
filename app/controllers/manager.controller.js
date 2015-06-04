@@ -1,4 +1,5 @@
 var Manager = require('../models/manager.model');
+var Bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
   /**
@@ -25,7 +26,8 @@ module.exports = {
    */
   addManager: function(req, res, next) {
     var manager = new Manager(req.body);
-    manager.token = 'sample Token'; // token to be generated later
+    var hash = Bcrypt.hashSync(req.body.username + req.body.password + new Date().getTime()); // to create user token
+    manager.token = hash;
     manager.save(function(err) {
       if(err) {
         res.json(err);
