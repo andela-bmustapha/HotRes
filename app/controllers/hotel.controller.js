@@ -59,8 +59,8 @@ module.exports = {
       });
     } else { // pull all hotels in database
       Hotel.find(function(err, hotels){
-        if(err) {
-          res.json(err);
+        if (err) {
+          res.json({message: 'No hotel found!'});
         }
         if (hotels) {
           res.json(hotels);
