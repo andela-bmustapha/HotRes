@@ -12,7 +12,9 @@ module.exports = {
       if(err) {
         res.json(err);
       }
-      res.json(managers);
+      if (managers) {
+        res.json(managers);
+      }
     });
   },
   /**
@@ -25,8 +27,9 @@ module.exports = {
     manager.save(function(err) {
       if(err) {
         res.json(err);
+      } else {
+        res.json({message:'Manager Added'});
       }
-      res.json({message:'Manager Added'});
     });
   },
   /**
@@ -39,18 +42,19 @@ module.exports = {
     Manager.findOne({_id:req.params.id}, function(err, manager){
       if(err) {
         res.json(err);
-      }
-      for(prop in req.body){
-        manager[prop] = req.body[prop];
-      }
-
-      // return edited manager object to database
-      manager.save(function(err) {
-        if (err) {
-          res.json(err);
+      } else {
+        for(prop in req.body){
+          manager[prop] = req.body[prop];
         }
-        res.json({ message: 'Manager updated!' });
-      });
+        // return edited manager object to database
+        manager.save(function(err) {
+          if (err) {
+            res.json(err);
+          } else {
+            res.json({ message: 'Manager updated!' });
+          }
+        });
+      }
     });
   },
   /**
@@ -62,9 +66,11 @@ module.exports = {
   getSingleManager: function(req, res){
     Manager.findOne({_id:req.params.id},function(err, manager) {
       if(err) {
-        res.json(err);
+        res.json({message: 'Manager not found!'});
       }
-      res.json(hotel);
+      if (manager) {
+        res.json(manager);
+      }
     });
   },
   /**
@@ -80,7 +86,9 @@ module.exports = {
       if (err) {
         res.json(err);
       }
-      res.json({ message: 'Successfully deleted' });
+      if (manager) {
+        res.json({ message: 'Successfully deleted' });
+      }
     });
   }
 }

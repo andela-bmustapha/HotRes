@@ -3,6 +3,8 @@ var Schema = mongoose.Schema;
 
 var managerSchema = new Schema({
     name: {type: String},
+    username: {type: String},
+    password: {type: String},
     hotel: [{type: mongoose.Schema.Types.ObjectId, ref: 'Hotel'}]
 });
 

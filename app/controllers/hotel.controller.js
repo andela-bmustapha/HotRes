@@ -14,7 +14,9 @@ module.exports = {
       if(err) {
         res.json(err);
       }
-      res.json(hotels);
+      if (hotels) {
+        res.json(hotels);
+      }
     });
   },
   /**
@@ -28,8 +30,9 @@ module.exports = {
     hotel.save(function(err) {
       if(err) {
         res.json(err);
+      } else {
+        res.json({message:'Hotel Added'});
       }
-      res.send({message:'Hotel Added'});
     });
   },
   /**
@@ -44,18 +47,20 @@ module.exports = {
     Hotel.findOne({_id:req.params.id}, function(err, hotel){
       if(err) {
         res.json(err);
-      }
-      for(prop in req.body){
-        hotel[prop] = req.body[prop];
-      }
-
-      // return modified hotel profile to database
-      hotel.save(function(err) {
-        if (err) {
-          res.json(err);
+      } else {
+        for(prop in req.body){
+          hotel[prop] = req.body[prop];
         }
-        res.json({ message: 'Hotel updated!' });
-      });
+
+        // return modified hotel profile to database
+        hotel.save(function(err) {
+          if (err) {
+            res.json(err);
+          } else {
+            res.json({ message: 'Hotel updated!' });
+          }
+        });
+      }
     });
   },
   /**
@@ -68,9 +73,11 @@ module.exports = {
   getSingleHotel: function(req, res){
     Hotel.findOne({_id:req.params.id},function(err, hotel) {
       if(err) {
-        res.json(err);
+        res.json({message: 'Error!'});
       }
-      res.json(hotel);
+      if (hotel) {
+        res.json(hotel);
+      }
     });
   },
   /**
@@ -85,9 +92,10 @@ module.exports = {
       _id: req.params.id
     }, function(err, hotel) {
       if (err) {
-        res.json(err);
+        res.json({message: 'Internal server error'});
+      } else {
+        res.json({ message: 'Successfully deleted' });
       }
-      res.json({ message: 'Successfully deleted' });
     });
   }
 };
