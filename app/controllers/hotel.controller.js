@@ -24,6 +24,7 @@ module.exports = {
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
+        next();
       });
     }
     /**
@@ -36,6 +37,7 @@ module.exports = {
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
+        next();
       });
     } else if (req.query.state) { // if only state is specified in query
       Hotel.find({state: req.query.state}, function(err, hotel) {
@@ -44,6 +46,7 @@ module.exports = {
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
+        next();
       });
     } else if (req.query.city) { // if only city is specified in query
       Hotel.find({city: req.query.city}, function(err, hotel) {
@@ -52,6 +55,7 @@ module.exports = {
         } else if (hotel.length > 0) {
           res.json(hotel);
         }
+        next();
       });
     } else { // pull all hotels in database
       Hotel.find(function(err, hotels){
