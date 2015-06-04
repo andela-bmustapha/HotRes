@@ -17,8 +17,10 @@ module.exports = {
     /**
      * Hotel api controller for hotel search based on manager token
     */
-    if (req.query.manager_token) {
-      Hotel.find({managerToken: req.query.manager_token}, function(err, hotel) {
+    token = req.headers['x-manager-token'];
+
+    if (token) {
+      Hotel.find({managerToken: token}, function(err, hotel) {
         if (err) {
           res.json({message: 'Server Error!'});
         }
