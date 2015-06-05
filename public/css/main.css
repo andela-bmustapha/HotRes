@@ -1,0 +1,14 @@
+body {
+  font-family: 'Lora', serif;
+}
+
+.logo-text {
+  color: black;
+  font-family: 'Tillana', cursive;
+  font-size: 50px;
+}
+
+.nav-text {
+  color: black
+  margin-right: 50px;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "HotRes",
+  "version": "0.0.1",
+  "homepage": "https://github.com/andela-bmustapha/HotRes",
+  "authors": [
+    "Mustapha Babatunde <mustapha.babtunde@andela.co>"
+  ],
+  "description": "Hotel Reservation Application",
+  "keywords": [
+    "Hotels",
+    "Hotel"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "materialize": "~0.96.1"
+  }
+}
