@@ -6,9 +6,7 @@ var managerSchema = new Schema({
     username: { type: String },
     password: { type: String },
     imageUrl: { type: String },
-    token: { type: String },
-    hotel: { type: String }
-    // {type: mongoose.Schema.Types.ObjectId, ref: 'Hotel'}
+    token: { type: String }
 });
 
 module.exports = mongoose.model('Manager', managerSchema);
