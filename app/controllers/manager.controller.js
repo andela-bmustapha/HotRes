@@ -108,14 +108,20 @@ module.exports = {
    */
   managerLogin: function(req, res, next) {
     Manager.find({username: req.body.username}, function(err, manager) {
+      if (err) {
+        res.json({message: 'Internal Server Error!'});
+      }
+
       if (manager.length === 0) {
         res.json({message: 'Username does not exist!'});
       } else if (manager.length === 1) {
         if (manager[0].password === req.body.password) {
           // return formatted object
           res.json({
+            id: manager[0]._id,
             name: manager[0].name,
             username: manager[0].username,
+            imageUrl: manager[0].imageUrl,
             token: manager[0].token
           });
         } else {

@@ -5,6 +5,7 @@ var managerSchema = new Schema({
     name: { type: String },
     username: { type: String },
     password: { type: String },
+    imageUrl: { type: String },
     token: { type: String },
     hotel: { type: String }
     // {type: mongoose.Schema.Types.ObjectId, ref: 'Hotel'}
