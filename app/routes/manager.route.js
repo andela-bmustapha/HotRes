@@ -13,8 +13,8 @@ module.exports = function(router){
     .post(Managers.addManager);
 
   router.route('/managers/:id')
+    .get(Managers.getSingleManager)
     .put(verifyToken, Managers.editManager)
-    .get(verifyToken, Managers.getSingleManager)
     .delete(verifyToken, Managers.deleteManager);
 
   router.route('/managers/login')

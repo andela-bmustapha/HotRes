@@ -64,10 +64,11 @@ module.exports = {
       });
     }
   },
+
   getManagerHotels: function(req, res, next) {
-    Hotel.find({managerId: req.params.id}, function(err, hotels) {
+    Hotel.find({ managerId: req.params.id }, function(err, hotels) {
       if (err) {
-        res.json({message: 'Error!'});
+        res.json({message: 'Server Error!'});
       }
       if (hotels) {
         if (hotels.length === 0) {
@@ -121,7 +122,6 @@ module.exports = {
           }
         });
       }
-      next();
     });
   },
   /**
@@ -132,14 +132,19 @@ module.exports = {
    */
   // api call function to grab specific hotel in database
   getSingleHotel: function(req, res, next) {
-    Hotel.findOne({_id:req.params.id},function(err, hotel) {
+    Hotel.findOne({ _id: req.params.id }, function(err, hotel) {
       if(err) {
-        return res.json({message: 'Error!'});
+        return res.json({ message: 'Server Error!' });
       }
-      res.json(hotel);
-      next();
+
+      if (hotel) {
+        res.json(hotel);
+      } else {
+        res.json({ message: 'No hotel found' })
+      }
     });
   },
+
   /**
    * [deleteHotel description]
    * @param  {[req]}
@@ -148,9 +153,7 @@ module.exports = {
    */
   // api call function to delete hotel profile from database based on specified id
   deleteHotel: function(req, res, next) {
-    Hotel.remove({
-      _id: req.params.id
-    }, function(err, hotel) {
+    Hotel.remove({ _id: req.params.id }, function(err, hotel) {
       if (err) {
         return res.json({message: 'Internal server error'});
       }
@@ -160,21 +163,25 @@ module.exports = {
       next();
     });
   },
+
   saveReview: function(req, res, next) {
-    Hotel.findOne({_id: req.params.id}, function(err, hotel) {
+    Hotel.findOne({ _id: req.params.id }, function(err, hotel) {
+      console.log('run...');
       if (err) {
-        res.json(err)
+        res.json({ message: 'Server Error' });
       }
       if (hotel) {
         hotel.reviews.push(req.body);
         // return modified hotel to database
         hotel.save(function(err) {
           if (err) {
-            res.json(err);
+            res.json({ message: 'Server Error' });
           } else {
             res.json({ message: 'Hotel updated' });
           }
         });
+      } else {
+        res.json({ message: 'Hotel not found' });
       }
     });
   }

@@ -9,15 +9,15 @@ var Schema = mongoose.Schema;
   meta info of database object
 */
 var hotelSchema = new Schema({
-    name: { type: String },
-    managerId: { type: String },
-    pictureUrl: { type: String },
-    state: { type: String },
-    city: { type: String },
-    rating: { type: String },
-    numberOfRooms: { type: Number },
-    availableRooms: { type: Number },
-    description: { type: String },
+    name: { type: String, required: true },
+    managerId: { type: String, required: true },
+    pictureUrl: { type: String, required: true },
+    state: { type: String, required: true },
+    city: { type: String, required: true },
+    rating: { type: String, required: true },
+    numberOfRooms: { type: Number, required: true },
+    availableRooms: { type: Number, required: true },
+    description: { type: String, required: true },
     reviews: [ { name: { type: String }, review: { type: String } } ]
 });
 

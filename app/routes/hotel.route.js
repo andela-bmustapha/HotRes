@@ -25,6 +25,6 @@ var verifyToken = require('../../config/tokenMiddleware');
   router.route('/hotels/manager/:id')
     .get(verifyToken, Hotels.getManagerHotels);
 
-  router.route('hotels/reviews/:id')
+  router.route('/hotels/reviews/:id')
     .post(Hotels.saveReview);
 };
