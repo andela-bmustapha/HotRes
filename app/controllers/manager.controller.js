@@ -27,6 +27,17 @@ module.exports = {
    * @param {[res]}
    */
   addManager: function(req, res, next) {
+    // check if username has been taken
+    Manager.findOne({username: req.body.username}, function(err, manager) {
+      if (err) {
+        return res.json({ message: 'Server Error' });
+      }
+      if (manager) {
+        return res.json({ message: 'Username already taken!' });
+      }
+      next();
+    });
+
     var manager = new Manager(req.body);
     var hash = Bcrypt.hashSync(req.body.password); // to create encrypted password
     manager.password = hash;
