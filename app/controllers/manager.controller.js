@@ -1,5 +1,6 @@
 var Manager = require('../models/manager.model');
 var Bcrypt = require('bcrypt-nodejs');
+var jwt = require('jsonwebtoken');
 
 module.exports = {
   /**
@@ -38,7 +39,7 @@ module.exports = {
       next();
     });
   },
-  
+
   /**
    * [editManager description]
    * @param  {[req]}
@@ -91,9 +92,7 @@ module.exports = {
    * @return {[void]}
    */
   deleteManager: function(req, res, next){
-    Manager.remove({
-      _id: req.params.id
-    }, function(err, manager) {
+    Manager.remove({ _id: req.params.id }, function(err, manager) {
       if (err) {
         res.json(err);
       }
@@ -112,7 +111,12 @@ module.exports = {
    * @return {[void]}
    */
   managerLogin: function(req, res, next) {
-    var hashedPassword = Bcrypt.hashSync(req.body.password) // hash the incomming password
+    var manager = new Manager();
+    // create a token for user
+    var token = jwt.sign(manager, secrets.sessionSecret, { expiresInMinutes: 1440 });
+    // hash the incomming password
+    var hashedPassword = Bcrypt.hashSync(req.body.password);
+
     Manager.find({username: req.body.username}, function(err, manager) {
       if (err) {
         res.json({message: 'Internal Server Error!'});
@@ -122,8 +126,6 @@ module.exports = {
         res.json({message: 'Username does not exist!'});
       } else if (manager.length === 1) {
         if (manager[0].password === hashedPassword) {
-          // create a user token
-          var token = Bcrypt.hashSync(hashedPassword + manager[0].username + new Date().getTime());
           // return formatted object
           res.json({
             id: manager[0]._id,

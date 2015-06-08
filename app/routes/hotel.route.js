@@ -6,21 +6,24 @@ var express = require('express');
     functions to be called by the route
 */
 var Hotels = require('../controllers/hotel.controller');
+var jwt = require('jsonwebtoken');
+var secret = require('../../config/secret');
+var verifyToken = require('../../config/tokenMiddleware');
 
   //configure routes
   module.exports = function(router){
 
   router.route('/hotels')
     .get(Hotels.getHotels)
-    .post(Hotels.addHotel);
+    .post(verifyToken, Hotels.addHotel);
 
   router.route('/hotels/:id')
-    .put(Hotels.editHotel)
+    .put(verifyToken, Hotels.editHotel)
     .get(Hotels.getSingleHotel)
-    .delete(Hotels.deleteHotel);
+    .delete(verifyToken, Hotels.deleteHotel);
 
   router.route('/hotels/manager/:id')
-    .get(Hotels.getManagerHotels);
+    .get(verifyToken, Hotels.getManagerHotels);
 
   router.route('hotels/reviews/:id')
     .post(Hotels.saveReview);

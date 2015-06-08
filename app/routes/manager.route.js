@@ -1,6 +1,8 @@
 var express = require('express');
-
 var Managers = require('../controllers/manager.controller');
+var jwt = require('jsonwebtoken');
+var secret = require('../../config/secret');
+var verifyToken = require('../../config/tokenMiddleware');
 
 //configure routes
 
@@ -11,9 +13,9 @@ module.exports = function(router){
     .post(Managers.addManager);
 
   router.route('/managers/:id')
-    .put(Managers.editManager)
-    .get(Managers.getSingleManager)
-    .delete(Managers.deleteManager);
+    .put(verifyToken, Managers.editManager)
+    .get(verifyToken, Managers.getSingleManager)
+    .delete(verifyToken, Managers.deleteManager);
 
   router.route('/managers/login')
     .post(Managers.managerLogin);
