@@ -21,4 +21,7 @@ var Hotels = require('../controllers/hotel.controller');
 
   router.route('/hotels/manager/:id')
     .get(Hotels.getManagerHotels);
+
+  router.route('hotels/reviews/:id')
+    .post(Hotels.saveReview);
 };

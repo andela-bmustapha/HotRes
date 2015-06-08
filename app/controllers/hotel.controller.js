@@ -12,7 +12,7 @@ module.exports = {
    * can also get hotels based on query search:
    * location(state, city or both)
    */
-  getHotels: function(req, res, next){
+  getHotels: function(req, res, next) {
     /**
      * Hotel api controller for hotel search based on location
      */
@@ -102,7 +102,7 @@ module.exports = {
    * @return {[void]}
    */
   // api call function to edit specific hotel based on provided id
-  editHotel: function(req, res, next){
+  editHotel: function(req, res, next) {
     // grab the specified hotel from database
     Hotel.findOne({_id: req.params.id}, function(err, hotel){
       if(err) {
@@ -117,7 +117,7 @@ module.exports = {
           if (err) {
             res.json(err);
           } else {
-            res.json({ message: 'Hotel updated!' });
+            res.json({ message: 'Hotel updated' });
           }
         });
       }
@@ -131,7 +131,7 @@ module.exports = {
    * @return {[void]}
    */
   // api call function to grab specific hotel in database
-  getSingleHotel: function(req, res, next){
+  getSingleHotel: function(req, res, next) {
     Hotel.findOne({_id:req.params.id},function(err, hotel) {
       if(err) {
         return res.json({message: 'Error!'});
@@ -147,7 +147,7 @@ module.exports = {
    * @return {[void]}
    */
   // api call function to delete hotel profile from database based on specified id
-  deleteHotel: function(req, res, next){
+  deleteHotel: function(req, res, next) {
     Hotel.remove({
       _id: req.params.id
     }, function(err, hotel) {
@@ -158,6 +158,24 @@ module.exports = {
         res.json({ message: 'Successfully deleted' });
       }
       next();
+    });
+  },
+  saveReview: function(req, res, next) {
+    Hotel.findOne({_id: req.params.id}, function(err, hotel) {
+      if (err) {
+        res.json(err)
+      }
+      if (hotel) {
+        hotel.reviews.push(req.body);
+        // return modified hotel to database
+        hotel.save(function(err) {
+          if (err) {
+            res.json(err);
+          } else {
+            res.json({ message: 'Hotel updated' });
+          }
+        });
+      }
     });
   }
 };

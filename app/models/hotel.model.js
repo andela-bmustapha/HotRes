@@ -17,7 +17,8 @@ var hotelSchema = new Schema({
     rating: { type: String },
     numberOfRooms: { type: Number },
     availableRooms: { type: Number },
-    description: { type: String }
+    description: { type: String },
+    reviews: [ { name: { type: String }, review: { type: String } } ]
 });
 
 module.exports = mongoose.model('Hotel', hotelSchema);
