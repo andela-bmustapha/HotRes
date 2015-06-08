@@ -34,18 +34,18 @@ module.exports = {
       }
       if (manager) {
         return res.json({ message: 'Username already taken!' });
-      }
-      next();
-    });
-
-    var manager = new Manager(req.body);
-    var hash = Bcrypt.hashSync(req.body.password); // to create encrypted password
-    manager.password = hash;
-    manager.save(function(err) {
-      if(err) {
-        res.json(err);
       } else {
-        res.json({message:'Manager Added'});
+        var manager = new Manager(req.body);
+        var hash = Bcrypt.hashSync(req.body.password); // to create encrypted password
+        manager.password = hash;
+        manager.save(function(err) {
+          if (err) {
+            res.json(err);
+          } else {
+            res.json({message:'Manager Added'});
+          }
+          next();
+        });
       }
       next();
     });
