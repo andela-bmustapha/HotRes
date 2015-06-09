@@ -14,6 +14,7 @@ var hotelSchema = new Schema({
     pictureUrl: { type: String, required: true },
     state: { type: String, required: true },
     city: { type: String, required: true },
+    address: { type: String, required: true},
     rating: { type: String, required: true },
     numberOfRooms: { type: Number, required: true },
     availableRooms: { type: Number, required: true },

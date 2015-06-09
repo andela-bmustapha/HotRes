@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col s12 blue-grey darken-4 white-text"><span class="right"> Contact... </span></div>
+    <div id="image-display" class="col s12">
+      
+      <div class="row search-panel center">
+
+        <div class="col s12 m6 l6 center">
+        <div class="card-panel black opaque">
+          <div class="row">
+            <div class="col s12 header white-text">
+              Hotel Search
+            </div>
+            <form class="col s12 white-text" ng-submit="search()">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="state" type="text" class="validate" data-ng-model="state">
+                  <label for="state">State</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="city" type="text" class="validate" data-ng-model="city">
+                  <label for="state">City</label>
+                </div>
+                <div class="input-field col s12">
+                  <button class="btn waves-effect waves-light" type="submit" name="action">Search</button>
+                </div>
+              </div>
+            </form>
+            <div class="col s12 card-panel transparent white-text">
+              <div class="col s12 white-text bolded" ng-bind="errorMessage"></div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="col s12 m6 l6"></div>
+
+      </div>
+    </div>
+  </div>

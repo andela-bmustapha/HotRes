@@ -16,10 +16,20 @@ module.exports = {
     /**
      * Hotel api controller for hotel search based on location
      */
+    
+    // convert to lowercase before search
+    if (req.query.state) {
+      req.query.state = req.query.state.toLowerCase();
+    }
+    if (req.query.city) {
+      req.query.city = req.query.city.toLowerCase();
+    }
+
     if (req.query.state && req.query.city) { // if both state and city are specified in query
+
       Hotel.find({state: req.query.state, city: req.query.city}, function(err, hotel) {
         if (err) {
-          res.json({message: 'Error!'});
+          res.json({message: 'Server Error'});
         }
         if (hotel) {
           if (hotel.length === 0) {
@@ -32,7 +42,7 @@ module.exports = {
     } else if (req.query.state) { // if only state is specified in query
       Hotel.find({state: req.query.state}, function(err, hotel) {
         if (err) {
-          res.json({message: 'Error!'});
+          res.json({message: 'Server Error'});
         }
         if (hotel) {
           if (hotel.length === 0) {
@@ -45,7 +55,7 @@ module.exports = {
     } else if (req.query.city) { // if only city is specified in query
       Hotel.find({city: req.query.city}, function(err, hotel) {
         if (err) {
-          res.json({message: 'Error!'});
+          res.json({message: 'Server Error'});
         }
         if (hotel.length === 0) {
           res.json({message: 'No hotel found in ' + req.query.city});
@@ -68,7 +78,7 @@ module.exports = {
   getManagerHotels: function(req, res, next) {
     Hotel.find({ managerId: req.params.id }, function(err, hotels) {
       if (err) {
-        res.json({message: 'Server Error!'});
+        res.json({message: 'Server Error'});
       }
       if (hotels) {
         if (hotels.length === 0) {
@@ -87,6 +97,15 @@ module.exports = {
    */
   // api call function to add hotel profile to database
   addHotel: function(req, res, next) {
+
+    // convert the state and city to lowercase for search
+    if (req.body.state) {
+      req.body.state = req.body.state.toLowerCase();
+    }
+    if (req.body.state) {
+      req.body.city = req.body.city.toLowerCase();
+    }
+
     var hotel = new Hotel(req.body);
     hotel.save(function(err) {
       if(err) {
@@ -166,7 +185,6 @@ module.exports = {
 
   saveReview: function(req, res, next) {
     Hotel.findOne({ _id: req.params.id }, function(err, hotel) {
-      console.log('run...');
       if (err) {
         res.json({ message: 'Server Error' });
       }
@@ -177,7 +195,7 @@ module.exports = {
           if (err) {
             res.json({ message: 'Server Error' });
           } else {
-            res.json({ message: 'Hotel updated' });
+            res.json({ message: 'Review saved' });
           }
         });
       } else {
