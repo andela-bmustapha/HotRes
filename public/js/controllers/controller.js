@@ -1,6 +1,6 @@
 
 // global url
-var Mainurl = 'http://localhost:8000';
+var Mainurl = 'http://hot-res.herokuapp.com';
 
 app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', function($rootScope, $scope, apiCall, $state) {
 
