@@ -1,8 +1,8 @@
 var Manager = require('../models/manager.model');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var secret = require('../../config/secret');
-var salt = bcrypt.genSaltSync(10);
+// var salt = bcrypt.genSaltSync(10);
 
 module.exports = {
   /**
@@ -64,8 +64,8 @@ module.exports = {
    */
   addManager: function(req, res, next) {
     var manager = new Manager(req.body);
-    var hash = bcrypt.hashSync(req.body.password, salt);
-    manager.password = hash;
+    // var hash = bcrypt.hashSync(req.body.password, salt);
+    // manager.password = hash;
     manager.save(function(err) {
       if (err) {
         if(err.name == 'MongoError' && err.message.indexOf('$email_1') > 0 ) {
@@ -148,7 +148,8 @@ module.exports = {
       if (manager.length === 0) {
         res.json({message: 'Username does not exist!'});
       } else if (manager.length === 1) {
-        if (bcrypt.compareSync(req.body.password, manager[0].password)) {
+        // if (bcrypt.compareSync(req.body.password, manager[0].password)) {
+        if (req.body.password === manager[0].password) {
           // return formatted object
           res.json({
             id: manager[0]._id,

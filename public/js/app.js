@@ -28,18 +28,6 @@ var app = angular.module('hot-res', ['ui.router'])
         }
       })
 
-      /*
-      .state('loggedOut.search.hotelInfo', {
-        url: '/hotel-Info',
-        views: {
-          'hotelView': {
-            templateUrl: 'partials/hotel-info.html'
-            // controller: 'hotelSearch'
-          }
-        }
-      })
-      */
-
       .state('loggedOut.signUp', {
         url: 'signup',
         views: {
