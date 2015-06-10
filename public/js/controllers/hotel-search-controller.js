@@ -11,8 +11,7 @@ app.controller('hotelSearch', ['$scope', 'apiCall', function($scope, apiCall) {
   function reviewSuccess(data) {
     $scope.name = '';
     $scope.comment = '';
-    console.log(data);
-
+    // review added success modal to be called from here...
   }
 
 
@@ -34,6 +33,7 @@ app.controller('hotelSearch', ['$scope', 'apiCall', function($scope, apiCall) {
 
   $scope.saveReviewModal = function(hotelId) {
     if (!$scope.name || !$scope.comment) {
+      $scope.reviewErrorMessage = 'Name and Comment are required';
       return;
     }
     // construct the url
@@ -53,15 +53,26 @@ app.controller('hotelSearch', ['$scope', 'apiCall', function($scope, apiCall) {
 
   // handle the review modal box operations
   $scope.openViewReviewsModal = function(hotel) {
+
+    // clear error message and review array
+    $scope.reviewReport = '';
+    $scope.reviews = [];
     
     // build the api url
     var url = '/api/hotels/' + hotel._id;
 
     // make the api call
     apiCall.hotelSearch(url).success( function (data) {
-      $scope.reviews = data.reviews;
+      if (data.reviews.length === 0) {
+        $scope.reviewReport = 'No Reviews.';
+        $('#viewReviews').openModal();
+      } else {
+        $scope.reviews = data.reviews;
+        $('#viewReviews').openModal();
+      }
+    }).error(function(err) {
+      $scope.error = 'We can\'t fetch the reviews at the moment. Please try again...';
     });
-    $('#viewReviews').openModal();
   };
 
 

@@ -1,12 +1,13 @@
 
 app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', function($rootScope, $scope, apiCall, $state) {
 
-
+  (function(){
+    $(".button-collapse").sideNav();
+  })();
   /* stand alone functions to handle
   *  api call promises...
   */
   function processResult(data) {
-    // later to check if an array is returned...
     if (data.constructor === Array) {
       $rootScope.apiData = data;
       $state.go('loggedOut.search');
@@ -41,9 +42,9 @@ app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', functio
 
 .controller('SignUpCtrl', ['$scope', function($scope) {
 
-}])
-
-.controller('SignInCtrl', ['$scope', function($scope) {
+  (function(){
+    $('ul.tabs').tabs()
+  })();
 
 }]);
 

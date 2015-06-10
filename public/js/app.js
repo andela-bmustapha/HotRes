@@ -1,6 +1,8 @@
 var app = angular.module('hot-res', ['ui.router'])
 
-  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    // $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/');
 
@@ -28,22 +30,12 @@ var app = angular.module('hot-res', ['ui.router'])
         }
       })
 
-      .state('loggedOut.signUp', {
-        url: 'signup',
+      .state('loggedOut.signUpLogIn', {
+        url: 'signUpLogIn',
         views: {
           'theView': {
-            templateUrl: 'partials/signUp.html',
+            templateUrl: 'partials/signUpLogin.html',
             controller: 'SignUpCtrl'
-          }
-        }
-      })
-
-      .state('loggedOut.signIn', {
-        url: 'signin',
-        views: {
-          'theView': {
-            templateUrl: 'partials/signIn.html',
-            controller: 'SignInCtrl'
           }
         }
       });

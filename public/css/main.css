@@ -2,6 +2,10 @@ body {
   font-family: 'Lora', serif;
 }
 
+#display-mobile {
+  cursor: pointer;
+}
+
 .logo-text {
   color: black;
   font-family: 'Tillana', cursive;
@@ -15,6 +19,10 @@ body {
 
 .result-row {
   margin-top: 30px;
+}
+
+.result-button {
+  margin-top: 20px;
 }
 
 .hotelImage {
@@ -43,4 +51,10 @@ body {
 #image-display {
   background-image: url("../img/tokyo-hotel-room.jpg");
   height: 500px;
+}
+
+#login-image-display {
+  background: #466368;
+  background: linear-gradient(to right, #f6f1d3, #648880 85%, #293f50);
+  
 }

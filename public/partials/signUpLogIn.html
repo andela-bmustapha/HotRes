@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col s12 grey white-text"><span class="right"> Contact... </span></div>
+    <div id="login-image-display" class="col s12">
+      
+      <div class="row search-panel center">
+
+        <div class="col s12 m3 l4 transparent-text">Text</div>
+
+        <div class="col s12 m6 l4">
+          <div class="row">
+
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s6"><a class="active" href="#loginTab">Log In</a></li>
+                <li class="tab col s6"><a href="#signupTab">Sign Up</a></li>
+              </ul>
+            </div>
+
+            <div id="loginTab" class="col s12 card-panel">
+              <div class="row">
+                <div class="col s12 header">Manager Login</div>
+                <form class="col s12" ng-submit="">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <i class="mdi-editor-format-underline prefix"></i>
+                      <input id="manager-username" type="text" class="validate" data-ng-model="loginUsername">
+                      <label for="manager-username">Username</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <i class="mdi-communication-vpn-key prefix"></i>
+                      <input id="manager-password" type="password" class="validate" data-ng-model="loginPassword">
+                      <label for="manager-password">Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <button class="btn waves-effect waves-light green" type="submit" name="action"><i class="large mdi-action-lock-open"></i> Login</button>
+                    </div>
+                  </div>
+                </form>
+                <div class="col s12 card-panel transparent white-text">
+                  <div class="col s12 white-text bolded" ng-bind="errorMessage"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="signupTab" class="col s12 card-panel">
+              <div class="row">
+                <div class="col s12 header">Manager SignUp</div>
+                <form class="col s12" ng-submit="">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <i class="mdi-action-account-circle prefix"></i>
+                      <input id="manager-name" type="text" class="validate" data-ng-model="signupName">
+                      <label for="manager-name">Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <i class="mdi-editor-format-underline prefix"></i>
+                      <input id="manager-username" type="text" class="validate" data-ng-model="signupUsername">
+                      <label for="manager-username">Username</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <i class=" mdi-communication-email prefix"></i>
+                      <input id="manager-email" type="email" class="validate" data-ng-model="signupEmail">
+                      <label for="manager-email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <i class="mdi-communication-vpn-key prefix"></i>
+                      <input id="manager-password" type="password" class="validate" data-ng-model="signupPassword">
+                      <label for="manager-password">Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <button class="btn waves-effect waves-light teal darken-4" type="submit" name="action"><i class="large mdi-action-perm-identity"></i> Sign Up</button>
+                    </div>
+                  </div>
+                </form>
+                <div class="col s12 card-panel transparent white-text">
+                <div class="col s12 white-text bolded" ng-bind="errorMessage"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l4 transparent-text">Text</div>
+
+      </div>
+    </div>
+</div>
