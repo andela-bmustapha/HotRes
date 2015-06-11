@@ -6,6 +6,9 @@ app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker'
   // self invoking function to handle mobile view menu
   (function(){
     $(".button-collapse").sideNav();
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
   })();
 
   /* check for cookies. If cookies are found, then manager is still logged in,
