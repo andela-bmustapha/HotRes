@@ -89,7 +89,7 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
     if (data.message) {
       // remove loader
-      $scope.loginLoader = false;
+      // $scope.loginLoader = false;
       $scope.LoginMessage = data.message;
     } else {
       // handle login success
