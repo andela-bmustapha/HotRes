@@ -11,6 +11,12 @@ app.factory('apiCall',['$http', function($http) {
     },
     saveReview: function(url, reqObject) {
       return $http.post(url, reqObject);
+    },
+    managerSignUp: function(reqObject) {
+      return $http.post('/api/managers', reqObject);
+    },
+    managerLogin: function(reqObject) {
+      return $http.post('/api/managers/login', reqObject);
     }
   };
 

@@ -38,14 +38,6 @@ app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', functio
     apiCall.hotelSearch(url).success(processResult);
 
   };
-}])
-
-.controller('SignUpCtrl', ['$scope', function($scope) {
-
-  (function(){
-    $('ul.tabs').tabs()
-  })();
-
 }]);
 
 

@@ -19,7 +19,7 @@
             <div id="loginTab" class="col s12 card-panel">
               <div class="row">
                 <div class="col s12 header">Manager Login</div>
-                <form class="col s12" ng-submit="">
+                <form class="col s12" ng-submit="logIn()">
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="mdi-editor-format-underline prefix"></i>
@@ -36,8 +36,8 @@
                     </div>
                   </div>
                 </form>
-                <div class="col s12 card-panel transparent white-text">
-                  <div class="col s12 white-text bolded" ng-bind="errorMessage"></div>
+                <div class="col s12 card-panel transparent red-text">
+                  <div class="col s12 bolded" ng-bind="LoginMessage"></div>
                 </div>
               </div>
             </div>
@@ -45,35 +45,47 @@
             <div id="signupTab" class="col s12 card-panel">
               <div class="row">
                 <div class="col s12 header">Manager SignUp</div>
-                <form class="col s12" ng-submit="">
+                <form class="col s12" ng-submit="signUp()">
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="mdi-action-account-circle prefix"></i>
-                      <input id="manager-name" type="text" class="validate" data-ng-model="signupName">
+                      <input  id="manager-name" type="text" class="validate tooltipped" data-ng-model="signupName" data-position="right" data-delay="50" data-tooltip="Min of 5 characters and no numbers">
                       <label for="manager-name">Name</label>
+                    </div>
+                    <div class="col s12 card-panel transparent red-text" ng-show="signupNameErrorMessage">
+                      <div class="col s12 smallBolded" ng-bind="signupNameErrorMessage"></div>
                     </div>
                     <div class="input-field col s12">
                       <i class="mdi-editor-format-underline prefix"></i>
-                      <input id="manager-username" type="text" class="validate" data-ng-model="signupUsername">
+                      <input id="manager-username" type="text" class="validate tooltipped" data-ng-model="signupUsername" data-position="right" data-delay="50" data-tooltip="Min of 5 characters">
                       <label for="manager-username">Username</label>
+                    </div>
+                    <div class="col s12 card-panel transparent red-text" ng-show="signupUsernameErrorMessage">
+                      <div class="col s12 smallBolded" ng-bind="signupUsernameErrorMessage"></div>
                     </div>
                     <div class="input-field col s12">
                       <i class=" mdi-communication-email prefix"></i>
-                      <input id="manager-email" type="email" class="validate" data-ng-model="signupEmail">
+                      <input id="manager-email" type="email" class="validate tooltipped" data-ng-model="signupEmail" data-position="right" data-delay="50" data-tooltip="example: sample@domain.com">
                       <label for="manager-email">Email</label>
+                    </div>
+                    <div class="col s12 card-panel transparent red-text" ng-show="signupEmailErrorMessage">
+                      <div class="col s12 smallBolded" ng-bind="signupEmailErrorMessage"></div>
                     </div>
                     <div class="input-field col s12">
                       <i class="mdi-communication-vpn-key prefix"></i>
-                      <input id="manager-password" type="password" class="validate" data-ng-model="signupPassword">
+                      <input id="manager-password" type="password" class="validate tooltipped" data-ng-model="signupPassword" data-position="right" data-delay="50" data-tooltip="Min of 8 characters and must contain at least a number">
                       <label for="manager-password">Password</label>
+                    </div>
+                    <div class="col s12 card-panel transparent red-text" ng-show="signupPasswordErrorMessage">
+                      <div class="col s12 smallBolded" ng-bind="signupPasswordErrorMessage"></div>
                     </div>
                     <div class="input-field col s12">
                       <button class="btn waves-effect waves-light teal darken-4" type="submit" name="action"><i class="large mdi-action-perm-identity"></i> Sign Up</button>
                     </div>
                   </div>
                 </form>
-                <div class="col s12 card-panel transparent white-text">
-                <div class="col s12 white-text bolded" ng-bind="errorMessage"></div>
+                <div class="col s12 card-panel transparent black-text" ng-show="signupMessage">
+                  <div class="col s12 smallBolded" ng-bind="signupMessage"></div>
                 </div>
               </div>
             </div>

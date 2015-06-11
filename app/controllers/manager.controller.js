@@ -69,12 +69,12 @@ module.exports = {
     manager.save(function(err) {
       if (err) {
         if(err.name == 'MongoError' && err.message.indexOf('$email_1') > 0 ) {
-          res.status(400).json({ error: 'Email is already registered. Please choose another' });
+          res.status(400).json({ message: 'Email is already registered. Please choose another' });
         } else if ( err.name == 'MongoError' && err.message.indexOf('$username_1') > 0) {
-          res.status(500).json({ error: 'Username is already taken. Please choose another' });
+          res.status(500).json({ message: 'Username is already taken. Please choose another' });
         }
       } else {
-        res.json({message:'Manager Added'});
+        res.json({message:'Sign up successful. Please Login to continue.'});
       }
       next();
     });
@@ -118,14 +118,14 @@ module.exports = {
    */
   deleteManager: function(req, res, next){
 
-      Manager.remove({ _id: req.params.id }, function(err, manager) {
-        if (err) {
-          res.json(err);
-        }
-        if (manager) {
-          res.json({ message: 'Successfully deleted' });
-        }
-      });
+    Manager.remove({ _id: req.params.id }, function(err, manager) {
+      if (err) {
+        res.json({ message: 'Deletion Error' });
+      }
+      if (manager) {
+        res.json({ message: 'Successfully deleted' });
+      }
+    });
   },
 
   /**

@@ -1,7 +1,7 @@
 
 // hotel search controller
 
-app.controller('hotelSearch', ['$scope', 'apiCall', function($scope, apiCall) {
+app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall) {
 
   /* stand alone functions to handle api call
      success results

@@ -25,7 +25,7 @@ var app = angular.module('hot-res', ['ui.router'])
         views: {
           'theView': {
             templateUrl: '../partials/search-results.html',
-            controller: 'hotelSearch'
+            controller: 'hotelSearchCtrl'
           }
         }
       })
@@ -35,7 +35,7 @@ var app = angular.module('hot-res', ['ui.router'])
         views: {
           'theView': {
             templateUrl: '../partials/signUpLogIn.html',
-            controller: 'SignUpCtrl'
+            controller: 'SignUpLogInCtrl'
           }
         }
       });
