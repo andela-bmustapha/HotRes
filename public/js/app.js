@@ -34,7 +34,7 @@ var app = angular.module('hot-res', ['ui.router'])
         url: 'signUpLogIn',
         views: {
           'theView': {
-            templateUrl: '../partials/signUpLogin.html',
+            templateUrl: '../partials/signUpLogIn.html',
             controller: 'SignUpCtrl'
           }
         }
