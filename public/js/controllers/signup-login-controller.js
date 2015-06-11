@@ -65,6 +65,9 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
   // function to be called on signup api call success
   function handleSignUpSuccess(data) {
+    // display a loader
+    $scope.signupLoader = false;
+
     $scope.signupMessage = data.message;
     
     // clear all models...
@@ -76,12 +79,17 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
   // function to handle api call error
   function handleSignUpError(data) {
+    // remove loader
+    $scope.signupLoader = false;
     $scope.signupMessage = data.message;
   }
 
   // function that handles login api call success
   function handleLoginSuccess(data) {
+
     if (data.message) {
+      // remove loader
+      $scope.loginLoader = false;
       $scope.LoginMessage = data.message;
     } else {
       // handle login success
@@ -91,7 +99,8 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
   // function that handles login api call error 
   function handleLogInError(data) {
-
+    // remove loader
+    $scope.loginLoader = false;
   }
 
   // function to handle sign up requests
@@ -101,6 +110,9 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
     if (!validate()) {
       return;  // break out of function on validation fail
     }
+
+    // display a loader
+    $scope.signupLoader = true;
 
     // build up the object to be sent with the api call
     var signUpObject = {
@@ -132,6 +144,9 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
       $scope.LoginMessage = 'Please enter a password';
       return;
     }
+
+    // display a loader
+    $scope.loginLoader = true;
 
     // build up the object
     var loginObject = {

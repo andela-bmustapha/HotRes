@@ -17,6 +17,11 @@ body {
   margin-right: 50px;
 }
 
+.small-loader {
+  height: 30px;
+  width: 30px;
+}
+
 .result-row {
   margin-top: 30px;
 }
