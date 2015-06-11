@@ -138,7 +138,7 @@ module.exports = {
   managerLogin: function(req, res, next) {
     var manager = new Manager();
     // create a token for user
-    var token = jwt.sign(manager, secret.sessionSecret, { expiresInMinutes: 1 });
+    var token = jwt.sign(manager, secret.sessionSecret, { expiresInMinutes: 1440 });
 
     Manager.find({username: req.body.username}, function(err, manager) {
       if (err) {
