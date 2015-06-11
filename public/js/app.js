@@ -11,10 +11,10 @@ var app = angular.module('hot-res', ['ui.router'])
         url: '/',
         views: {
           '' : {
-            templateUrl: './partials/nav-loggedOut.html'
+            templateUrl: '../partials/nav-loggedOut.html'
           },
           'theView@loggedOut': {
-            templateUrl: './partials/landing.html',
+            templateUrl: '../partials/landing.html',
             controller: 'MainCtrl'
           }
         }
@@ -24,7 +24,7 @@ var app = angular.module('hot-res', ['ui.router'])
         url: 'search',
         views: {
           'theView': {
-            templateUrl: './partials/search-results.html',
+            templateUrl: '../partials/search-results.html',
             controller: 'hotelSearch'
           }
         }
@@ -34,7 +34,7 @@ var app = angular.module('hot-res', ['ui.router'])
         url: 'signUpLogIn',
         views: {
           'theView': {
-            templateUrl: './partials/signUpLogin.html',
+            templateUrl: '../partials/signUpLogin.html',
             controller: 'SignUpCtrl'
           }
         }
