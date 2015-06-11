@@ -1,9 +1,15 @@
 
-app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', function($rootScope, $scope, apiCall, $state) {
+app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', 'logChecker', function($rootScope, $scope, apiCall, $state, logChecker) {
 
   (function(){
     $(".button-collapse").sideNav();
   })();
+
+  // check logged in state
+  if (logChecker.isLoggedIn()) {
+    $state.go('loggedIn');
+  }
+  
   /* stand alone functions to handle
   *  api call promises...
   */

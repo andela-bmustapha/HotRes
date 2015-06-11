@@ -1,4 +1,4 @@
-var app = angular.module('hot-res', ['ui.router'])
+var app = angular.module('hot-res', ['ui.router', 'ngCookies'])
 
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -36,6 +36,20 @@ var app = angular.module('hot-res', ['ui.router'])
           'theView': {
             templateUrl: '../partials/signUpLogIn.html',
             controller: 'SignUpLogInCtrl'
+          }
+        }
+      })
+
+      .state('loggedIn', {
+        url: '/dashboard',
+        views: {
+          '' : {
+            templateUrl: '../partials/nav-loggedIn.html',
+            controller: 'DashboardMainCtrl'
+          },
+          'theView@loggedIn': {
+            templateUrl: '../partials/dashboard.html',
+            controller: 'DashboardMainCtrl'
           }
         }
       });

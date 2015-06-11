@@ -1,7 +1,7 @@
 
 // controller to handle signup and login
 
-app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall) {
+app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', function($scope, apiCall, $state, $cookies) {
 
   // function to handle tooltip and tabs
   (function(){
@@ -89,11 +89,13 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
     if (data.message) {
       // remove loader
-      // $scope.loginLoader = false;
+      $scope.loginLoader = false;
       $scope.LoginMessage = data.message;
     } else {
-      // handle login success
-      
+      // handle login success (store info in cookies and redirect to dashboard)
+      $cookies.put('managerId', data.id);
+      $cookies.put('managerToken', data.token);
+      $state.go('loggedIn');
     }
   }
 
