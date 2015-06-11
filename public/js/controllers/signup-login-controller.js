@@ -131,6 +131,9 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', fu
   // function to handle login requests
   $scope.logIn = function() {
 
+    // clear error message
+    $scope.LoginMessage = '';
+
     // Do some basic validations
     if (
         (!$scope.loginUsername && !$scope.loginPassword) || 
