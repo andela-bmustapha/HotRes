@@ -51,6 +51,26 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies'])
             controller: 'DashboardMainCtrl'
           }
         }
+      })
+
+      .state('loggedIn.hotels', {
+        url: '/hotels',
+        views: {
+          'dashView': {
+            templateUrl: '../partials/manager-hotels.html',
+            controller: 'DashboardMainCtrl'
+          }
+        }
+      })
+
+      .state('loggedIn.editProfile', {
+        url: '/profile',
+        views: {
+          'dashView': {
+            templateUrl: '../partials/manager-profile.html',
+            controller: 'DashboardMainCtrl'
+          }
+        }
       });
 
   }]);
