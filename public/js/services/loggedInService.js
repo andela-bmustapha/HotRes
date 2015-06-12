@@ -13,6 +13,7 @@ app.factory('logChecker', ['$cookies', function($cookies) {
     },
     logout: function() {
       $cookies.remove('managerId');
+      $cookies.remove('managerToken');
     }
   };
 }]);

@@ -12,6 +12,10 @@ body {
   font-size: 50px;
 }
 
+.hotel-buttons {
+  margin-top: 10px;
+}
+
 .nav-text {
   color: black
   margin-right: 50px;
@@ -45,6 +49,10 @@ body {
   font-size: 18px;
 }
 
+.manager-name {
+  font-weight: bold;
+}
+
 .smallBolded {
   font-size: 14px;
   font-weight: bold;
@@ -68,10 +76,28 @@ body {
   background: linear-gradient(to right, #f6f1d3, #648880 85%, #293f50);
 }
 
-.dashboard-sidebar {
-  height: 500px;
+#manager-profile {
+  margin-top: 40px;
 }
 
-.dashboard-main {
-  margin: auto;
+#manager-profile:hover {
+  background-color: white;
 }
+
+.image-size {
+  height: 160px;
+  width: 160px;
+  border-radius: 80px;
+}
+
+header, main, footer, nav {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+

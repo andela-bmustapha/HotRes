@@ -17,6 +17,9 @@ app.factory('apiCall',['$http', function($http) {
     },
     managerLogin: function(reqObject) {
       return $http.post('/api/managers/login', reqObject);
+    },
+    getSingleManager: function(managerId) {
+      return $http.get('api/managers/' + managerId);
     }
   };
 

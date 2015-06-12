@@ -1,33 +1,30 @@
 <div class="row"> <!-- Start of row1 -->
 
-  <div class="col s12 m3 l3 black-text dashboard-sidebar">
-    
-    <ul class="collapsible popout" data-collapsible="accordion">
-      <li>
-        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>First</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+  <div class="col s12 m3 l3 black-text">
+    <ul id="slide-out" class="side-nav fixed">
+      <li id="manager-profile">
+        <div class="row">
+          <div class="col s12 m12 center-on-small-only">
+            <div class="image-container">
+              <img class="image-size" ng-src="{{managerDetails.imageUrl}}">
+            </div>            
+          </div>
+          <div class="col s12 m12 center">
+            <h5 class="manager-name">{{managerDetails.name}}</h5>
+            <p>
+              <i class="mdi-social-person-add"></i><br>{{managerDetails.username}}<br><br>
+              <i class="mdi-content-mail"></i><br>{{managerDetails.email}}
+            </p>
+          </div>
+        </div>
       </li>
-      <li>
-        <div class="collapsible-header"><i class="mdi-maps-place"></i>Second</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="mdi-social-whatshot"></i>Third</div>
-        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-      </li>
+      <li><a href="">Edit Profile</a></li>
+      <li><a href="">Hotels</a></li>
+      <li><a href="">View Bookings</a></li>
+      <li><a ng-click="dashLogout()" class="dash-logout">Logout</a></li>
     </ul>
-
-
-
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </div>
-
-
-
-
-
-
-
-
 
 
 

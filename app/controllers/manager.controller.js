@@ -40,7 +40,7 @@ module.exports = {
   getSingleManager: function(req, res, next) {
     Manager.findOne({ _id: req.params.id }, function(err, manager) {
       if (err) {
-        res.json({ message: 'Server Error' })
+        res.json({ message: 'Manager not found!' });
       }
       if (manager) {
         res.json({

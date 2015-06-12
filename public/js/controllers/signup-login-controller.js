@@ -1,13 +1,18 @@
 
 // controller to handle signup and login
 
-app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', function($scope, apiCall, $state, $cookies) {
+app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', 'logChecker', function($scope, apiCall, $state, $cookies, logChecker) {
 
   // function to handle tooltip and tabs
   (function(){
     $('.tooltipped').tooltip({delay: 50});
     $('ul.tabs').tabs()
   })();
+
+  // check logged in state
+  if (logChecker.isLoggedIn()) {
+    $state.go('loggedIn');
+  }
 
   // validation function to run on submit
   function validate() {

@@ -36,8 +36,10 @@
                     </div>
                   </div>
                 </form>
-                <div class="col s12 card-panel transparent red-text">
+                <div class="col s12 transparent black-text">
                   <img ng-src="img/ajax.gif" ng-show="loginLoader" class="small-loader" alt="login loader" />
+                </div>
+                <div class="col s12 card-panel transparent red-text">
                   <div class="col s12 bolded" ng-bind="LoginMessage"></div>
                 </div>
               </div>
@@ -85,8 +87,10 @@
                     </div>
                   </div>
                 </form>
-                <div class="col s12 card-panel transparent black-text" ng-show="signupMessage">
+                <div class="col s12 transparent black-text">
                   <img ng-src="img/ajax.gif" ng-show="signupLoader" class="small-loader" alt="signup loader" />
+                </div>
+                <div class="col s12 card-panel transparent black-text" ng-show="signupMessage">
                   <div class="col s12 smallBolded" ng-bind="signupMessage"></div>
                 </div>
               </div>

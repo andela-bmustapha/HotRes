@@ -1,14 +1,11 @@
 
 // dashboard main controller
 
-app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker', function($scope, apiCall, $state, logChecker) {
+app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$cookies', function($scope, apiCall, $state, logChecker, $cookies) {
 
   // self invoking function to handle mobile view menu
   (function(){
     $(".button-collapse").sideNav();
-    $('.collapsible').collapsible({
-      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    });
   })();
 
   /* check for cookies. If cookies are found, then manager is still logged in,
@@ -18,6 +15,39 @@ app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker'
   if (!logChecker.isLoggedIn()) {
     $state.go('loggedOut');
   }
+
+  // get values from cookies
+  var managerId = $cookies.get('managerId');
+  var managerToken = $cookies.get('managerToken');
+
+  // function to handle the dashboard population apiCall success
+  function populateDash(data) {
+    $scope.managerDetails = data;
+    if (!$scope.managerDetails.imageUrl) {
+      $scope.managerDetails.imageUrl = 'img/avatar.png';
+    }
+  }
+
+
+
+  // make api call to populate the dashboard nav bar
+  // get managerId from cookies before api call
+  apiCall.getSingleManager(managerId).success(populateDash);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

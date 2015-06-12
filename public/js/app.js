@@ -44,8 +44,7 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies'])
         url: '/dashboard',
         views: {
           '' : {
-            templateUrl: '../partials/nav-loggedIn.html',
-            controller: 'DashboardMainCtrl'
+            templateUrl: '../partials/nav-loggedIn.html'
           },
           'theView@loggedIn': {
             templateUrl: '../partials/dashboard.html',
