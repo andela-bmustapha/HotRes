@@ -20,6 +20,27 @@ app.factory('apiCall',['$http', function($http) {
     },
     getSingleManager: function(managerId) {
       return $http.get('api/managers/' + managerId);
+    },
+    getManagerHotel: function(managerId, managerToken) {
+      var req = {
+        method: 'GET',
+        url: '/api/hotels/manager/' + managerId,
+        headers: {
+          'x-access-token': managerToken
+        }
+      }
+      return $http(req);
+    },
+    saveHotel: function(hotelId, managerToken, reqObject) {
+      var req = {
+        method: 'PUT',
+        url: '/api/hotels/' + hotelId,
+        headers: {
+          'x-access-token': managerToken
+        },
+        data: reqObject
+      }
+      return $http(req);
     }
   };
 

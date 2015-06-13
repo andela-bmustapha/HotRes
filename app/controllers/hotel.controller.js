@@ -126,7 +126,7 @@ module.exports = {
     // grab the specified hotel from database
     Hotel.findOne({_id: req.params.id}, function(err, hotel){
       if(err) {
-        res.json(err);
+        res.json({ message: 'Server Error' });
       } else {
         for(prop in req.body){
           hotel[prop] = req.body[prop];
@@ -135,7 +135,7 @@ module.exports = {
         // return modified hotel profile to database
         hotel.save(function(err) {
           if (err) {
-            res.json(err);
+            res.json({ message: 'Error Updating Hotel' });
           } else {
             res.json({ message: 'Hotel updated' });
           }

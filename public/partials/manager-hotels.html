@@ -1,3 +1,92 @@
-<p>
-  Manager Hotels...
-</p>
+<!-- Modal Structure -->
+<div id="hotelReviewModel" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>All Reviews</h4>
+    <p data-ng-show="reviewReport">{{reviewReport}}</p>
+    <p data-ng-repeat="review in hotelReviews">
+      Name: {{review.name}} <br>
+      Comment: {{review.review}}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn waves-effect waves-light" data-ng-click="closeViewReviewsModal()">Close</button>
+  </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="editHotelModal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Edit {{singleHotel.name}}</h4>
+    <form class="col s12 black-text">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="hotelName" type="text" class="validate" data-ng-model="hotelName">
+          <label for="hotelName">Hotel Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="hotelPictureUrl" type="text" class="validate" data-ng-model="hotelPictureUrl">
+          <label for="hotelPictureUrl">Hotel ImageUrl</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="hotelState" type="text" class="validate" data-ng-model="hotelState">
+          <label for="hotelState">State</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="hotelCity" type="text" class="validate" data-ng-model="hotelCity">
+          <label for="hotelCity">City</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="hotelAddress" class="materialize-textarea" data-ng-model="hotelAddress"></textarea>
+          <label for="hotelAddress">Full Address</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="hotelDescription" class="materialize-textarea" data-ng-model="hotelDescription"></textarea>
+          <label for="hotelDescription">Description</label><br>
+          <span ng-show="hotelSaveError">{{hotelSaveError}}</span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn waves-effect waves-light" data-ng-click="saveHotel(singleHotel)">Save</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="row">
+
+  <div class="col s12 m4 l4">
+    <table ng-hide="managerHotelErrorMessage" class="hoverable">
+      <thead>
+        <tr>
+          <th data-field="id">Hotel Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="hotel in managerHotels">
+          <td><a class="dash-logout" ng-click="viewHotel(hotel)">{{hotel.name}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p ng-show="managerHotelErrorMessage">{{managerHotelErrorMessage}}</p>
+  </div>
+
+  <div ng-show="singleHotel" class="col s12 m7 l7">
+    <h4 class="center">{{singleHotel.name}}</h4>
+    <img class="hotelImage" ng-src="{{singleHotel.pictureUrl}}"><br>
+    Location: {{singleHotel.city}}, {{singleHotel.state}}.<br>
+    Full Address: {{singleHotel.address}}<br>
+    Description: {{singleHotel.description}}<br><br>
+    <button class="waves-effect waves-light btn" ng-click="editHotel(singleHotel)">Edit Hotel</button>
+    <button class="waves-effect waves-light btn" ng-click="viewReviews(singleHotel)">View Reviews</button>
+  </div>
+
+</div>

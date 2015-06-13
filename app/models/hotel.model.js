@@ -16,8 +16,6 @@ var hotelSchema = new Schema({
     city: { type: String, required: true },
     address: { type: String, required: true},
     rating: { type: String, required: true },
-    numberOfRooms: { type: Number, required: true },
-    availableRooms: { type: Number, required: true },
     description: { type: String, required: true },
     reviews: [ { name: { type: String }, review: { type: String } } ]
 });
