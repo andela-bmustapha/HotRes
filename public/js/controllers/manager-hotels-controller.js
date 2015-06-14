@@ -23,22 +23,21 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
   var managerId = $cookies.get('managerId');
   var managerToken = $cookies.get('managerToken');
 
-  // make api call to populate the dashboard nav bar
-  // get managerId from cookies before api call
-  apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
-
-
-
   // function to be called on successful api call
   function processHotels(data) {
     // check if manager has no hotel by checking for the 
     // message key in returned data
     if (data.message) {
-      $scope.managerHotelErrorMessage = data.message;
+      $scope.managerHotelErrorMessage = 'You currently manage no hotel.';
     } else {
       $scope.managerHotels = data;
     }
   }
+
+  // make api call to populate the dashboard nav bar
+  // get managerId from cookies before api call
+  apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
+
 
   // function to run when hotel is saved
   function processHotelSave(data) {
