@@ -17,13 +17,6 @@ module.exports = {
      * Hotel api controller for hotel search based on location
      */
     
-    // convert to lowercase before search
-    if (req.query.state) {
-      req.query.state = req.query.state.toLowerCase();
-    }
-    if (req.query.city) {
-      req.query.city = req.query.city.toLowerCase();
-    }
 
     if (req.query.state && req.query.city) { // if both state and city are specified in query
 
@@ -97,14 +90,6 @@ module.exports = {
    */
   // api call function to add hotel profile to database
   addHotel: function(req, res, next) {
-
-    // convert the state and city to lowercase for search
-    if (req.body.state) {
-      req.body.state = req.body.state.toLowerCase();
-    }
-    if (req.body.state) {
-      req.body.city = req.body.city.toLowerCase();
-    }
 
     var hotel = new Hotel(req.body);
     hotel.save(function(err) {
