@@ -4,12 +4,42 @@
   <div id="booking" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Make a Reservation</h4>
-      <p>Reservation form to appear here...</p>
+      <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="bookerName" type="text" class="validate" data-ng-model="bookerName">
+          <label for="bookerName">Name</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+          <span>Start Date</span>
+          <input id="bookStartDate" type="date" class="validate" data-ng-model="bookStartDate">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m6 l6">
+          <span>End Date</span>
+          <input id="bookEndDate" type="date" class="validate" data-ng-model="bookEndDate">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="bookerComment" class="materialize-textarea" data-ng-model="bookerComment"></textarea>
+          <label for="bookerComment">Comments</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button class="btn waves-effect waves-light green" data-ng-click="makeReservation()">Book</button>
+        </div>
+      </div>
+    </form>
     </div>
     <div class="modal-footer">
-      <button class="btn waves-effect waves-light" data-ng-click="closeBookingModal()">Close</button>
+      <button class="btn waves-effect waves-light red" data-ng-click="closeBookingModal()">Close</button>
     </div>
   </div>
+
+
 
   <!-- Modal Structure -->
   <div id="addReviews" class="modal modal-fixed-footer">
@@ -53,7 +83,7 @@
 
 
 
-<div class="row center result-row">Search Results</div>
+<div class="row center result-row"><h5 class="bold">Search Results</h5></div>
 
 <div class="row" class="result-row">
 
@@ -74,7 +104,7 @@
           Rating: {{hotel.rating}} <br>
           Description: {{hotel.description}}
         </p>
-        <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openBookingModal()">Book</button><br>
+        <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openBookingModal(hotel)">Book</button><br>
         <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openAddReviewModal(hotel)">Add Review</button><br>
         <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openViewReviewsModal(hotel)">View Reviews</button>
       </div>

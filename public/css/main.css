@@ -49,6 +49,10 @@ body {
   font-size: 18px;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .manager-name {
   font-weight: bold;
 }
@@ -100,4 +104,6 @@ header, main, footer, #logged-in-nav {
   }
 }
 
-
+.icon-info {
+  font-size: 18px;
+}

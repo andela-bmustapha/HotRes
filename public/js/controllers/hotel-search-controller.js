@@ -16,7 +16,43 @@ app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
 
 
-  $scope.openBookingModal = function() {
+  // function to save booking infomation to database
+  $scope.makeReservation = function() {
+    // build up the request object
+    var reqObject = {
+      hotelId: $scope.hotelToBookId,
+      hotelName: $scope.hotelToBookName,
+      managerId: $scope.hotelToBookManagerId,
+      bookerName: $scope.bookerName,
+      startDate: $scope.bookStartDate,
+      endDate: $scope.bookEndDate,
+      comment: $scope.bookerComment
+    };
+
+    // make api call to save booking to database
+    apiCall.sendReservation(reqObject).success(function(data) {
+      if (data.message === 'Reservation sent') {
+        // clear all models
+        $scope.hotelToBookId = '';
+        $scope.hotelToBookName = '';
+        $scope.hotelToBookManagerId = '';
+        $scope.bookerName = '';
+        $scope.bookStartDate = '';
+        $scope.bookEndDate = '';
+        $scope.bookerComment = '';
+
+        // alert user
+        alert('Reservation sent!');
+        $('#booking').closeModal();
+      }
+    });
+  }
+
+  $scope.openBookingModal = function(hotel) {
+    // save hotel id to a scope variable
+    $scope.hotelToBookId = hotel._id;
+    $scope.hotelToBookName = hotel.name;
+    $scope.hotelToBookManagerId = hotel.managerId;
     $('#booking').openModal();
   };
   $scope.closeBookingModal = function() {

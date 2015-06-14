@@ -62,6 +62,12 @@ app.factory('apiCall',['$http', function($http) {
       }
       return $http(req);
     };
+    info.sendReservation = function(reqObject) {
+      return $http.post('/api/bookings', reqObject);
+    };
+    info.pullManagerReservations = function() {
+
+    }
 
   return  info;
 
