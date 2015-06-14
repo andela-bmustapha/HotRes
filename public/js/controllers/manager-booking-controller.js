@@ -25,6 +25,6 @@ app.controller('ManagerBookingsCtrl', ['$scope', 'apiCall', 'logChecker', '$cook
 
   // make api call to populate the dashboard nav bar
   // get managerId from cookies before api call
-  apiCall.getSingleManager(managerId).success();
+  // apiCall.getSingleManager(managerId).success();
 
 }]);

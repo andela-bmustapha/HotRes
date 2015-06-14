@@ -20,36 +20,15 @@ app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker'
   var managerId = $cookies.get('managerId');
   var managerToken = $cookies.get('managerToken');
 
-  // function to handle the dashboard population apiCall success
-  function populateDash(data) {
-    $scope.managerDetails = data;
-    if (!$scope.managerDetails.imageUrl) {
-      $scope.managerDetails.imageUrl = 'img/avatar.png';
-    }
-  }
-
-
 
   // make api call to populate the dashboard nav bar
   // get managerId from cookies before api call
-  apiCall.getSingleManager(managerId).success(populateDash);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  apiCall.getSingleManager(managerId).then(function(){
+    $scope.managerDetails = apiCall.manager;
+    if (!$scope.managerDetails.imageUrl) {
+      $scope.managerDetails.imageUrl = 'img/avatar.png';
+    }
+  })
 
   // logout function
   $scope.dashLogout = function() {

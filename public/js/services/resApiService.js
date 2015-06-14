@@ -4,24 +4,33 @@
 */
 
 app.factory('apiCall',['$http', function($http) {
+    var info = {
+      manager: []
+    };
 
-  return {
-    hotelSearch: function(url) {
+    info.hotelSearch = function(url) {
       return  $http.get(url);
-    },
-    saveReview: function(url, reqObject) {
+    };
+
+    info.saveReview = function(url, reqObject) {
       return $http.post(url, reqObject);
-    },
-    managerSignUp: function(reqObject) {
+    };
+
+    info.managerSignUp = function(reqObject) {
       return $http.post('/api/managers', reqObject);
-    },
-    managerLogin: function(reqObject) {
+    };
+
+    info.managerLogin = function(reqObject) {
       return $http.post('/api/managers/login', reqObject);
-    },
-    getSingleManager: function(managerId) {
-      return $http.get('api/managers/' + managerId);
-    },
-    getManagerHotel: function(managerId, managerToken) {
+    };
+
+    info.getSingleManager = function(managerId) {
+      return $http.get('api/managers/' + managerId).success(function(data) {
+        console.log(data)
+        angular.copy(data, info.manager)
+      });
+    };
+    info.getManagerHotel = function(managerId, managerToken) {
       var req = {
         method: 'GET',
         url: '/api/hotels/manager/' + managerId,
@@ -30,8 +39,8 @@ app.factory('apiCall',['$http', function($http) {
         }
       }
       return $http(req);
-    },
-    saveHotel: function(hotelId, managerToken, reqObject) {
+    };
+    info.saveHotel = function(hotelId, managerToken, reqObject) {
       var req = {
         method: 'PUT',
         url: '/api/hotels/' + hotelId,
@@ -41,7 +50,19 @@ app.factory('apiCall',['$http', function($http) {
         data: reqObject
       }
       return $http(req);
-    }
-  };
+    };
+    info.saveManager = function(managerId, managerToken, reqObject) {
+      var req = {
+        method: 'PUT',
+        url: '/api/managers/' + managerId,
+        headers: {
+          'x-access-token': managerToken
+        },
+        data: reqObject
+      }
+      return $http(req);
+    };
+
+  return  info;
 
 }]);

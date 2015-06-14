@@ -34,10 +34,9 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
     }
   }
 
-  // make api call to populate the dashboard nav bar
+  // make api call to populate the manager's hotel dash
   // get managerId from cookies before api call
   apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
-
 
   // function to run when hotel is saved
   function processHotelSave(data) {

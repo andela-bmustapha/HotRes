@@ -62,7 +62,7 @@
 
 <div class="row">
 
-  <div class="col s12 m4 l4" ng-show="managerHotels">
+  <div class="col s12 m4 l4" ng-hide="managerHotelErrorMessage">
     <table class="hoverable">
       <thead>
         <tr>
@@ -75,10 +75,8 @@
         </tr>
       </tbody>
     </table>
-
-    <p ng-show="managerHotelErrorMessage">{{managerHotelErrorMessage}}</p>
   </div>
-
+  <p class="col s12 m4 l4" ng-show="managerHotelErrorMessage">{{managerHotelErrorMessage}}</p>
   <div ng-show="singleHotel" class="col s12 m7 l7">
     <h4 class="center">{{singleHotel.name}}</h4>
     <img class="hotelImage" ng-src="{{singleHotel.pictureUrl}}"><br>

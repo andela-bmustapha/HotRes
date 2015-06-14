@@ -90,7 +90,7 @@ body {
   border-radius: 80px;
 }
 
-header, main, footer, nav {
+header, main, footer, #logged-in-nav {
   padding-left: 240px;
 }
 

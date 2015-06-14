@@ -95,8 +95,6 @@ module.exports = {
 
       // edit the returned object
       manager.name = req.body.name || manager.name;
-      manager.username = req.body.username || manager.username;
-      manager.email = req.body.email || manager.email;
       manager.imageUrl = req.body.imageUrl || manager.imageUrl;
       
       // return edited manager object to database
