@@ -1,6 +1,6 @@
 /*
   api-call service that makes the api call using the 
-  andgular in-built $http service for AJAX calls
+  angular in-built $http service for AJAX calls
 */
 
 app.factory('apiCall',['$http', function($http) {
