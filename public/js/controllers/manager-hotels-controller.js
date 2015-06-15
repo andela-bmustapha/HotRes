@@ -70,6 +70,7 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
     $scope.hotelCity = hotel.city;
     $scope.hotelAddress = hotel.address;
     $scope.hotelDescription = hotel.description;
+    $scope.hotelBookable = hotel.bookable;
 
     // open modal window
     $('#editHotelModal').openModal();
@@ -79,15 +80,27 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
   $scope.saveHotel = function(hotel) {
 
     // validate the models before saving to database..
-    if (!$scope.hotelName || !$scope.hotelPictureUrl || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription) {
+    if (!$scope.hotelName || !$scope.hotelPictureUrl || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription || !$scope.hotelBookable) {
       $scope.hotelSaveError = 'All fields are required!'
       return;
     }
 
     // check if no change was made to models...
-    if ($scope.hotelName === hotel.name && $scope.hotelPictureUrl === hotel.pictureUrl && $scope.hotelState === hotel.state && $scope.hotelCity === hotel.city && $scope.hotelAddress === hotel.address && $scope.hotelDescription === hotel.description) {
+    if ($scope.hotelName === hotel.name && $scope.hotelPictureUrl === hotel.pictureUrl && $scope.hotelState === hotel.state && $scope.hotelCity === hotel.city && $scope.hotelAddress === hotel.address && $scope.hotelDescription === hotel.description && $scope.hotelBookable === hotel.bookable) {
       $scope.hotelSaveError = 'No change was made.'
       return;
+    }
+
+    // check if bookable model is filled correctly
+    $scope.hotelBookable = $scope.hotelBookable.toLowerCase();
+    if ($scope.hotelBookable !== 'yes') {
+      if ($scope.hotelBookable !== 'no') {
+        if (!$scope.hotelAddErrorMessage) {
+          $scope.hotelSaveError = 'Availability can either be "yes" or "no"';
+          validated = false;
+          return;
+        }
+      }
     }
 
     // build up the request object
@@ -137,6 +150,11 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
         }
       });
     }
+  }
+
+  // function to close edit modal box
+  $scope.closeEditModal = function() {
+    $('#editHotelModal').closeModal();
   }
 
 }]);

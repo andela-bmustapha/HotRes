@@ -20,7 +20,7 @@ module.exports = {
 
     if (req.query.state && req.query.city) { // if both state and city are specified in query
 
-      Hotel.find({state: {$regex: req.query.state, $options: '$i'}, city: {$regex: req.query.city, $options: '$i'}}, function(err, hotel) {
+      Hotel.find({state: {$regex: req.query.state, $options: '$i'}, city: {$regex: req.query.city, $options: '$i'}, bookable: 'yes'}, function(err, hotel) {
         if (err) {
           res.json({message: 'Server Error'});
         }
@@ -33,7 +33,7 @@ module.exports = {
         }
       });
     } else if (req.query.state) { // if only state is specified in query
-      Hotel.find({state: {$regex: req.query.state, $options: '$i'}}, function(err, hotel) {
+      Hotel.find({state: {$regex: req.query.state, $options: '$i'}, bookable: 'yes'}, function(err, hotel) {
         if (err) {
           res.json({message: 'Server Error'});
         }
@@ -46,7 +46,7 @@ module.exports = {
         }
       });
     } else if (req.query.city) { // if only city is specified in query
-      Hotel.find({city: {$regex: req.query.city, $options: '$i'}}, function(err, hotel) {
+      Hotel.find({city: {$regex: req.query.city, $options: '$i'}, bookable: 'yes'}, function(err, hotel) {
         if (err) {
           res.json({message: 'Server Error'});
         }
