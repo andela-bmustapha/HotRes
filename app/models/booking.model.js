@@ -15,7 +15,8 @@ var bookingSchema = new Schema({
     bookerName: { type: String, required: true },
     checkInDate: { type: Date, required: true },
     checkOutDate: { type: Date, required: true },
-    comment: { type: String, required: true }
+    comment: { type: String, required: true },
+    confirmed: { type: String, required: true, default: 'no'}
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);

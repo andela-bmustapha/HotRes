@@ -15,7 +15,7 @@ module.exports = {
     });
   },
 
-  getallBookings: function(req, res, next){
+  getallBookings: function(req, res, next) {
     Booking.find(function(err, bookings){
       if(err) {
         res.json({message: 'Server error'});
@@ -30,26 +30,47 @@ module.exports = {
   },
 
   getManagerBookings: function(req, res, next) {
-    Booking.find({ managerId: req.params.id }, function(err, bookings) {
+    Booking.find({ managerId: req.params.id, confirmed: 'no' }, function(err, bookings) {
       if (err) {
         res.json({ message: 'Server error' });
       }
       if (bookings.length > 0) {
         res.json(bookings);
       } else {
-        res.json({ message: 'No hotel booked yet' });
+        res.json({ message: 'No new booking' });
       }
       next();
     });
   },
 
-  deleteBooking: function(req, res, next){
+  deleteBooking: function(req, res, next) {
     Booking.remove({ _id: req.params.id }, function(err, booking) {
       if (err) {
         res.json({ message: 'Deletion Error' });
       }
       if (booking) {
         res.json({ message: 'Successfully deleted' });
+      }
+    });
+  },
+
+  treat: function(req, res, next) {
+    Booking.findOne({_id: req.params.id}, function(err, booking) {
+      if (err) {
+        res.json({ message: 'Fetch error' });
+      }
+      if (booking) {
+        // change the value in booking.confirmed field
+        booking.confirmed = 'yes';
+        // return booking to database
+        booking.save(function(err) {
+          if (err) {
+            res.json({ message: 'Booking can\'t be treated at the moment' });
+          } else {
+            res.json({ message: 'Booking marked as treated' });
+          }
+          next();
+        });
       }
     });
   }

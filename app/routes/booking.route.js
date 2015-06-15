@@ -19,5 +19,6 @@ module.exports = function(router){
 
   router.route('/bookings/:id')
     .get(Bookings.getManagerBookings)
+    .post(verifyToken, Bookings.treat)
     .delete(verifyToken, Bookings.deleteBooking);
 };

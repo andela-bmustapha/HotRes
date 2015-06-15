@@ -1,3 +1,41 @@
-<p>
-  Manager Hotels Bookings....
-</p>
+
+<div class="row">
+  <div class="col s12 m12"><h4 class="bold">Bookings</h4></div>
+  <div class="col s12 m2 transparent-text">Text</div>
+
+
+  <div class="col s12 m8">
+    
+    <div class="row">
+
+      <div class="col s12" data-ng-show="noBookingMessage"><h5 class="bold">{{noBookingMessage}}</h5></div>
+
+      <div class="col s12 card" data-ng-show="showBookings" data-ng-repeat="booking in managerBookings">
+        <div class="card-content black-text">
+          <span class="card-title black-text">Customer's Name: {{booking.bookerName}}</span>
+          <p>
+            Check-in Date: {{booking.checkInDate | amDateFormat:'dddd, MMMM Do YYYY'}}<br>
+            Check-out Date: {{booking.checkOutDate | amDateFormat:'dddd, MMMM Do YYYY'}}<br>
+            Comment: {{booking.comment}}
+          </p>
+        </div>
+        <div class="card-action">
+          <button class="btn waves-effect waves-light green" data-ng-click="treat(booking)">
+            Mark as Treated
+          </button>
+          <button class="btn waves-effect waves-light red" data-ng-click="delete(booking)">
+            Delete
+          </button>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+  
+
+
+
+  <div class="col s12 m2 transparent-text">Text</div>
+
+</div>

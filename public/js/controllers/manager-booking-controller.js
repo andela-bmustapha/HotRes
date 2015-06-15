@@ -22,9 +22,54 @@ app.controller('ManagerBookingsCtrl', ['$scope', 'apiCall', 'logChecker', '$cook
   var managerId = $cookies.get('managerId');
   var managerToken = $cookies.get('managerToken');
 
+  // function to refresh bookings
+  function refreshBookings() {
+    // make api call to get all manager's bookings
+    apiCall.pullManagerReservations(managerId).success(function(data) {
+      if (data.message === 'No new booking') {
+        $scope.showBookings = false;
+        $scope.noBookingMessage = data.message;
+      } else {
+        $scope.managerBookings = data;
+        $scope.showBookings = true;
+      }
+    });
+  }
 
-  // make api call to populate the dashboard nav bar
-  // get managerId from cookies before api call
-  // apiCall.getSingleManager(managerId).success();
+  // make api call to get all manager's bookings
+  refreshBookings();
+
+  // function to handle the treat buttons
+  $scope.treat = function(booking) {
+    // make api call to mark as treated
+    apiCall.treatReservation(managerToken, booking._id).success(function(data) {
+      if (data.message === 'Booking marked as treated') {
+        alert(data.message);
+        // make api call to refresh booking
+        refreshBookings();
+      } else if (data.message === 'Booking can\'t be treated at the moment') {
+        alert(data.message);
+      } else if (data.message === 'Fetch error') {
+        alert('Error fetching data from database');
+      }
+    });
+  }
+
+  // function to handle the delete buttons
+  $scope.delete = function(booking) {
+    var action = confirm("Do you really want to delete?");
+    if (action === true) {
+      // make api call to delete
+      apiCall.deleteReservation(managerToken, booking._id).success(function(data) {
+        if (data.message === 'Successfully deleted') {
+          alert('Booking deletion successful');
+          // make api call to refresh booking
+          refreshBookings();
+        } else {
+          alert('Deletion failed');
+        }
+      });
+    }
+  }
 
 }]);

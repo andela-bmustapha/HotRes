@@ -52,6 +52,7 @@ app.factory('apiCall',['$http', function($http) {
         angular.copy(data, info.manager)
       });
     };
+
     info.getManagerHotel = function(managerId, managerToken) {
       var req = {
         method: 'GET',
@@ -62,6 +63,7 @@ app.factory('apiCall',['$http', function($http) {
       }
       return $http(req);
     };
+
     info.saveHotel = function(hotelId, managerToken, reqObject) {
       var req = {
         method: 'PUT',
@@ -73,6 +75,7 @@ app.factory('apiCall',['$http', function($http) {
       }
       return $http(req);
     };
+
     info.saveManager = function(managerId, managerToken, reqObject) {
       var req = {
         method: 'PUT',
@@ -84,11 +87,35 @@ app.factory('apiCall',['$http', function($http) {
       }
       return $http(req);
     };
+
     info.sendReservation = function(reqObject) {
       return $http.post('/api/bookings', reqObject);
     };
-    info.pullManagerReservations = function() {
 
+    info.pullManagerReservations = function(managerId) {
+      return $http.get('/api/bookings/' + managerId);
+    };
+
+    info.treatReservation = function(managerToken, bookingId) {
+      var req = {
+        method: 'POST',
+        url: '/api/bookings/' + bookingId,
+        headers: {
+          'x-access-token': managerToken
+        }
+      }
+      return $http(req);
+    };
+
+    info.deleteReservation = function(managerToken, bookingId) {
+      var req = {
+        method: 'DELETE',
+        url: '/api/bookings/' + bookingId,
+        headers: {
+          'x-access-token': managerToken
+        },
+      }
+      return $http(req);
     }
 
   return  info;
