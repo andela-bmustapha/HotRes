@@ -1,0 +1,57 @@
+
+
+
+<div class="row">
+  
+  <h4 class="col s12 m6 l4 black-text">Add Hotel</h4>
+  <form class="col s12 m6 l6 black-text">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="hotelName" type="text" class="validate" data-ng-model="hotelName">
+        <label for="hotelName">Hotel Name</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="hotelRating" type="number" class="validate" data-ng-model="hotelRating">
+        <label for="hotelRating">Star Rating (example: 5)</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="hotelBookable" type="text" class="validate" data-ng-model="hotelBookable">
+        <label for="hotelBookable">Availability (example: yes)</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="hotelPictureUrl" type="text" class="validate" data-ng-model="hotelPictureUrl">
+        <label for="hotelPictureUrl">Hotel ImageUrl</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="hotelState" type="text" class="validate" data-ng-model="hotelState">
+        <label for="hotelState">State</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="hotelCity" type="text" class="validate" data-ng-model="hotelCity">
+        <label for="hotelCity">City</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="hotelAddress" class="materialize-textarea" data-ng-model="hotelAddress"></textarea>
+        <label for="hotelAddress">Full Address</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="hotelDescription" class="materialize-textarea" data-ng-model="hotelDescription"></textarea>
+        <label for="hotelDescription">Description</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="hotelWebsite" type="text" class="validate" data-ng-model="hotelWebsite">
+        <label for="hotelWebsite">Website (example: http://www.example.com)</label>
+      </div>
+      <p data-ng-show="hotelAddErrorMessage" class="input-field col s12 red-text bolded">
+        {{hotelAddErrorMessage}}
+      </p>
+      <div class="input-field col s12">
+        <button class="btn waves-effect waves-light green" type="submit" name="action" data-ng-click="saveHotel()">
+          Save Hotel
+        </button> <br>
+      </div>
+    </div>
+  </form>
+
+
+</div>

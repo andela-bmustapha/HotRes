@@ -12,6 +12,8 @@ app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall
     $scope.name = '';
     $scope.comment = '';
     // review added success modal to be called from here...
+    alert('Review sent');
+    $('#addReviews').closeModal();
   }
 
 
@@ -24,8 +26,8 @@ app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall
       hotelName: $scope.hotelToBookName,
       managerId: $scope.hotelToBookManagerId,
       bookerName: $scope.bookerName,
-      startDate: $scope.bookStartDate,
-      endDate: $scope.bookEndDate,
+      checkInDate: $scope.bookStartDate,
+      checkOutDate: $scope.bookEndDate,
       comment: $scope.bookerComment
     };
 
@@ -82,7 +84,6 @@ app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall
 
     // make the api call to send request to save review in database
     apiCall.saveReview(url, reqObject).success(reviewSuccess);
-    $('#addReviews').closeModal();
   };
 
 
@@ -115,5 +116,9 @@ app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall
   $scope.closeViewReviewsModal = function() {
     $('#viewReviews').closeModal();
   };
+
+  $scope.closeAddReviewsModal = function() {
+    $('#addReviews').closeModal();
+  }
 
 }]);

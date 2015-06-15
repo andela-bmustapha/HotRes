@@ -11,13 +11,13 @@
           <label for="bookerName">Name</label>
         </div>
         <div class="input-field col s12 m6 l6">
-          <span>Start Date</span>
+          <span>Check-in Date</span>
           <input id="bookStartDate" type="date" class="validate" data-ng-model="bookStartDate">
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6 l6">
-          <span>End Date</span>
+          <span>Check-out Date</span>
           <input id="bookEndDate" type="date" class="validate" data-ng-model="bookEndDate">
         </div>
       </div>
@@ -56,12 +56,16 @@
             <label for="comment">Comment</label><br>
             <span ng-show="reviewErrorMessage">{{reviewErrorMessage}}</span>
           </div>
-          
+          <div class="input-field col s12">
+            <button class="btn waves-effect waves-light" data-ng-click="saveReviewModal(hotelId)">
+              Add Review
+            </button>
+          </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button class="btn waves-effect waves-light" data-ng-click="saveReviewModal(hotelId)">Add Review</button>
+      <button class="btn waves-effect waves-light red" data-ng-click="closeAddReviewsModal()">Close</button>
     </div>
   </div>
 
@@ -76,7 +80,7 @@
       </p>
     </div>
     <div class="modal-footer">
-      <button class="btn waves-effect waves-light" data-ng-click="closeViewReviewsModal()">Close</button>
+      <button class="btn waves-effect waves-light red" data-ng-click="closeViewReviewsModal()">Close</button>
     </div>
   </div>
 
@@ -100,9 +104,11 @@
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">{{hotel.name}} <i class="mdi-navigation-close right"></i></span>
         <p>
-          State: {{hotel.state}}, City: {{hotel.city}}, Address: {{hotel.address}} <br>
-          Rating: {{hotel.rating}} <br>
-          Description: {{hotel.description}}
+          State: {{hotel.state}}, City: {{hotel.city}}<br>
+          Full Address: {{hotel.address}} <br>
+          Rating: {{hotel.rating}} Star <br>
+          Description: {{hotel.description}} <br>
+          <span data-ng-show="hotel.website">Website: <a data-ng-href="{{hotel.website}}">{{hotel.name}}</a> Website</span>
         </p>
         <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openBookingModal(hotel)">Book</button><br>
         <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openAddReviewModal(hotel)">Add Review</button><br>

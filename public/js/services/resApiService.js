@@ -12,6 +12,29 @@ app.factory('apiCall',['$http', function($http) {
       return  $http.get(url);
     };
 
+    info.addHotel = function(managerToken, reqObject) {
+      var req = {
+        method: 'POST',
+        url: '/api/hotels',
+        headers: {
+          'x-access-token': managerToken
+        },
+        data: reqObject
+      }
+      return $http(req);
+    };
+
+    info.deleteHotel = function(managerToken, hotelId) {
+      var req = {
+        method: 'DELETE',
+        url: '/api/hotels/' + hotelId,
+        headers: {
+          'x-access-token': managerToken
+        },
+      }
+      return $http(req);
+    };
+
     info.saveReview = function(url, reqObject) {
       return $http.post(url, reqObject);
     };
@@ -26,7 +49,6 @@ app.factory('apiCall',['$http', function($http) {
 
     info.getSingleManager = function(managerId) {
       return $http.get('api/managers/' + managerId).success(function(data) {
-        console.log(data)
         angular.copy(data, info.manager)
       });
     };

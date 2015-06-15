@@ -115,4 +115,28 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
     $('#hotelReviewModel').closeModal();
   }
 
+  // function to delete hotel
+  $scope.deleteHotel = function(hotel) {
+
+    // display a prompt to confirm delete
+    var action = confirm("Are you sure you want to delete " + hotel.name);
+    if (action !== true) {
+      return;
+    } else {
+      // make api call to delete hotel
+      apiCall.deleteHotel(managerToken, hotel._id).success(function(data) {
+        if (data.message === 'Successfully deleted') {
+          alert('Hotel successfully deleted!');
+          // refresh hotel list here...
+          apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
+          $scope.singleHotel = '';
+        } else if (data.message === 'Unauthorized Access. Mismatched token.') {
+          alert(data.message);
+        } else if (data.message === 'Unauthorized Access') {
+          alert(data.message);
+        }
+      });
+    }
+  }
+
 }]);

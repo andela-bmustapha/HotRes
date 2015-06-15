@@ -13,8 +13,8 @@ var bookingSchema = new Schema({
     hotelName: { type: String, required: true },
     managerId: { type: String, required: true },
     bookerName: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    checkInDate: { type: Date, required: true },
+    checkOutDate: { type: Date, required: true },
     comment: { type: String, required: true }
 });
 

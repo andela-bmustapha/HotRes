@@ -94,9 +94,9 @@ module.exports = {
     var hotel = new Hotel(req.body);
     hotel.save(function(err) {
       if(err) {
-        return res.json(err);
+        return res.json({ message:'Hotel add error' });
       }
-      res.json({message:'Hotel Added'});
+      res.json({ message:'Hotel Added' });
       next();
     });
   },

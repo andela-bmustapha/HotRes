@@ -81,6 +81,16 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies'])
             controller: 'ManagerBookingsCtrl'
           }
         }
+      })
+
+      .state('loggedIn.hotelsAdd', {
+        url: '/hotels/add',
+        views: {
+          'dashView': {
+            templateUrl: '../partials/hotel-add.html',
+            controller: 'addHotelCtrl'
+          }
+        }
       });
 
   }]);

@@ -28,7 +28,7 @@ app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker'
     if (!$scope.managerDetails.imageUrl) {
       $scope.managerDetails.imageUrl = 'img/avatar.png';
     }
-  })
+  });
 
   // logout function
   $scope.dashLogout = function() {
