@@ -3,20 +3,6 @@
 
 app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall) {
 
-  /* stand alone functions to handle api call
-     success results
-  */
- 
-  // function for review saving...
-  function reviewSuccess(data) {
-    $scope.name = '';
-    $scope.comment = '';
-    // review added success modal to be called from here...
-    alert('Review sent');
-    $('#addReviews').closeModal();
-  }
-
-
 
   // function to save booking infomation to database
   $scope.makeReservation = function() {
@@ -83,7 +69,13 @@ app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall
     }
 
     // make the api call to send request to save review in database
-    apiCall.saveReview(url, reqObject).success(reviewSuccess);
+    apiCall.saveReview(url, reqObject).success(function(data) {
+      $scope.name = '';
+      $scope.comment = '';
+      // review added success modal to be called from here...
+      alert('Review sent');
+      $('#addReviews').closeModal();
+    });
   };
 
 
