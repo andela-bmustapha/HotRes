@@ -18,6 +18,7 @@ app.factory('apiCall',['$http', function($http) {
         url: '/api/hotels',
         headers: {
           'x-access-token': managerToken
+          // 'Content-Type': 'multipart/form-data'
         },
         data: reqObject
       }

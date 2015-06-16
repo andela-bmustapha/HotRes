@@ -15,7 +15,10 @@ var verifyToken = require('../../config/tokenMiddleware');
 
   router.route('/hotels')
     .get(Hotels.getHotels)
-    .post(verifyToken, Hotels.addHotel);
+    .post(Hotels.addHotel);
+
+  router.route('/files')
+    .post(Hotels.uploadImage);
 
   router.route('/hotels/:id')
     .put(verifyToken, Hotels.editHotel)

@@ -1,5 +1,8 @@
 // import the hotel model file
 var Hotel = require('../models/hotel.model');
+var cloudinary = require('cloudinary');
+
+
 
 module.exports = {
   /**
@@ -88,9 +91,21 @@ module.exports = {
    * @param {[req]}
    * @param {[res]}
    */
+
+  // function to upload image
+
+  uploadImage: function(req, res, next) {
+
+    cloudinary.uploader.upload(req.files.file.path, function(result) {
+      res.json(result);
+    });
+
+  },
+
   // api call function to add hotel profile to database
   addHotel: function(req, res, next) {
 
+    
     var hotel = new Hotel(req.body);
     hotel.save(function(err) {
       if(err) {

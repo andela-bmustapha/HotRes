@@ -1,4 +1,4 @@
-var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment'])
+var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 'angularFileUpload'])
 
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 

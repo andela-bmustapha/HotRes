@@ -17,6 +17,9 @@
     "angular-ui-router": "~0.2.15",
     "angular-cookies": "~1.4.0",
     "angular-moment": "~0.10.1",
-    "perfect-scrollbar": "~0.6.2"
+    "angular-file-upload": "~1.1.5"
+  },
+  "resolutions": {
+    "angular": "~1.4.0"
   }
 }

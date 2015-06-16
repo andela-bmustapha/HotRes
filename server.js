@@ -6,15 +6,22 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var routes = require('./app/routes');
+var multer = require('multer');
 var router = express.Router();
+var path = require('path');
 var app = express();
 
 app.set('port', process.env.PORT || 8000);
 
+app.use(multer({ 
+    dest: './uploads/'
+  })
+);
+
 mongoose.connect(secret.db);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/public'));
 

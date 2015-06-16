@@ -11,7 +11,7 @@ var Schema = mongoose.Schema;
 var hotelSchema = new Schema({
     name: { type: String, required: true },
     managerId: { type: String, required: true },
-    pictureUrl: { type: String, required: true },
+    pictureUrl: { type: String},
     state: { type: String, required: true },
     city: { type: String, required: true },
     address: { type: String, required: true},

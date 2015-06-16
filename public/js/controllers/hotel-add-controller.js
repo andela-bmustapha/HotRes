@@ -1,7 +1,7 @@
 
 // dashboard main controller
 
-app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$cookies', function($scope, apiCall, $state, logChecker, $cookies) {
+app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$cookies', '$upload', function($scope, apiCall, $state, logChecker, $cookies, $upload) {
 
   // self invoking function to handle mobile view menu
   (function(){
@@ -27,7 +27,7 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
     var validated = true;
 
     // check hotel name
-    if (!$scope.hotelName || !$scope.hotelRating || !$scope.hotelBookable || !$scope.hotelPictureUrl || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription) {
+    if (!$scope.hotelName || !$scope.hotelRating || !$scope.hotelBookable || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription) {
       $scope.hotelAddErrorMessage = 'Some fields are required';
       validated = false;
     }
@@ -57,48 +57,61 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
     return validated;
   }
 
+  $scope.fileSelected = function(files) {
+    if (files && files.length) {
+      $scope.file = files[0];
+    }
+  };
+
+
   // function to save hotel to database
   $scope.saveHotel = function() {
 
-    // reset error message
-    $scope.hotelAddErrorMessage = '';
+    $upload.upload({
+      url: '/api/files',
+      file: $scope.file
+    }).progress(function(evt) {}).success(function(data) {
+        // make the save apiCall in here...
+        // reset error message
+        $scope.hotelAddErrorMessage = '';
 
-    if (!validate()) {
-      return;
-    }
+        if (!validate()) {
+          return;
+        }
 
-    // build up the requestObject
-    var requestObject = {
-      name: $scope.hotelName,
-      managerId: managerId,
-      pictureUrl: $scope.hotelPictureUrl,
-      state: $scope.hotelState,
-      city: $scope.hotelCity,
-      address: $scope.hotelAddress,
-      rating: $scope.hotelRating,
-      description: $scope.hotelDescription,
-      website: $scope.hotelWebsite,
-      bookable: $scope.hotelBookable
-    }
+        // build up the requestObject
+        var requestObject = {
+          name: $scope.hotelName,
+          managerId: managerId,
+          state: $scope.hotelState,
+          pictureUrl: data.url,
+          city: $scope.hotelCity,
+          address: $scope.hotelAddress,
+          rating: $scope.hotelRating,
+          description: $scope.hotelDescription,
+          website: $scope.hotelWebsite,
+          bookable: $scope.hotelBookable
+        }
 
-    // make api call to save hotel in database
-    apiCall.addHotel(managerToken, requestObject).success(function(data) {
-      if (data.message === 'Hotel add error') {
-        alert(data.message);
-      } else if (data.message === 'Hotel Added') {
-        alert(data.message);
-        // clear all models
-        $scope.hotelName = '';
-        $scope.hotelPictureUrl = '';
-        $scope.hotelState = '';
-        $scope.hotelCity = '';
-        $scope.hotelAddress = '';
-        $scope.hotelRating = '';
-        $scope.hotelDescription = '';
-        $scope.hotelWebsite = '';
-        $scope.hotelBookable = '';
-      }
-    });
+        // make api call to save hotel in database
+        apiCall.addHotel(managerToken, requestObject).success(function(data) {
+          if (data.message === 'Hotel add error') {
+            alert(data.message);
+          } else if (data.message === 'Hotel Added') {
+            alert(data.message);
+            // clear all models
+            $scope.hotelName = '';
+            $scope.hotelPictureUrl = '';
+            $scope.hotelState = '';
+            $scope.hotelCity = '';
+            $scope.hotelAddress = '';
+            $scope.hotelRating = '';
+            $scope.hotelDescription = '';
+            $scope.hotelWebsite = '';
+            $scope.hotelBookable = '';
+          }
+        });
+      });
   }
 
 }]);

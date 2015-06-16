@@ -4,7 +4,7 @@
 <div class="row">
   
   <h4 class="col s12 m12 l4 black-text">Add Hotel</h4>
-  <form class="col s12 m12 l6 black-text">
+  <form class="col s12 m12 l6 black-text" enctype="multipart/form-data" data-ng-submit="saveHotel()">
     <div class="row">
       <div class="input-field col s12">
         <input id="hotelName" type="text" class="validate" data-ng-model="hotelName">
@@ -19,8 +19,9 @@
         <label for="hotelBookable">Availability (example: yes)</label>
       </div>
       <div class="input-field col s12">
-        <input id="hotelPictureUrl" type="text" class="validate" data-ng-model="hotelPictureUrl">
-        <label for="hotelPictureUrl">Hotel ImageUrl</label>
+        <!--input id="hotelPictureUrl" type="text" class="validate" data-ng-model="hotelPictureUrl"-->
+        <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'" required="">
+        <!--label for="hotelPictureUrl">Hotel ImageUrl</label-->
       </div>
       <div class="input-field col s12">
         <input id="hotelState" type="text" class="validate" data-ng-model="hotelState">
@@ -46,7 +47,7 @@
         {{hotelAddErrorMessage}}
       </p>
       <div class="input-field col s12">
-        <button class="btn waves-effect waves-light green" type="submit" name="action" data-ng-click="saveHotel()">
+        <button class="btn waves-effect waves-light green" type="submit" name="action">
           Save Hotel
         </button> <br>
       </div>
