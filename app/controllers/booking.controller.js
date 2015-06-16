@@ -30,7 +30,7 @@ module.exports = {
   },
 
   getManagerBookings: function(req, res, next) {
-    Booking.find({ managerId: req.params.id, confirmed: 'no' }, function(err, bookings) {
+    Booking.find({ managerId: req.params.id}, function(err, bookings) {
       if (err) {
         res.json({ message: 'Server error' });
       }
@@ -61,7 +61,7 @@ module.exports = {
       }
       if (booking) {
         // change the value in booking.confirmed field
-        booking.confirmed = 'yes';
+        booking.confirmed = true;
         // return booking to database
         booking.save(function(err) {
           if (err) {

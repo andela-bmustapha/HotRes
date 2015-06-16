@@ -20,10 +20,11 @@
           </p>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light green" data-ng-click="treat(booking)">
+          <span data-ng-show="booking.confirmed"><img src="img/check.png"></span>
+          <button data-ng-hide="booking.confirmed" class="btn waves-effect waves-light green" data-ng-click="treat(booking)">
             Mark as Treated
           </button>
-          <button class="btn waves-effect waves-light red" data-ng-click="delete(booking)">
+          <button class="btn waves-effect waves-light red right" data-ng-click="delete(booking)">
             Delete
           </button>
         </div>
