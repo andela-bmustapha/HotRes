@@ -5,7 +5,9 @@ app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker'
 
   // self invoking function to handle mobile view menu
   (function(){
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav({
+      menuWidth: 270, // Default is 240
+    });
   })();
 
   /* check for cookies. If cookies are found, then manager is still logged in,
