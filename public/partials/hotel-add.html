@@ -18,10 +18,12 @@
         <input id="hotelBookable" type="text" class="validate" data-ng-model="hotelBookable">
         <label for="hotelBookable">Availability (example: yes)</label>
       </div>
-      <div class="input-field col s12">
-        <!--input id="hotelPictureUrl" type="text" class="validate" data-ng-model="hotelPictureUrl"-->
-        <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'" required="">
-        <!--label for="hotelPictureUrl">Hotel ImageUrl</label-->
+      <div class="file-field input-field input-field col s12">
+        <input class="file-path validate" type="text"/>
+        <div class="btn">
+          <span>File</span>
+          <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'" required="" />
+        </div>
       </div>
       <div class="input-field col s12">
         <input id="hotelState" type="text" class="validate" data-ng-model="hotelState">

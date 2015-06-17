@@ -67,17 +67,20 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
   // function to save hotel to database
   $scope.saveHotel = function() {
 
+    // make the save apiCall in here...
+    // reset error message
+    $scope.hotelAddErrorMessage = '';
+
+    if (!validate()) {
+      return;
+    }
+
     $upload.upload({
       url: '/api/files',
       file: $scope.file
-    }).progress(function(evt) {}).success(function(data) {
-        // make the save apiCall in here...
-        // reset error message
-        $scope.hotelAddErrorMessage = '';
+    }).progress(function(evt) {
 
-        if (!validate()) {
-          return;
-        }
+    }).success(function(data) {
 
         // build up the requestObject
         var requestObject = {
@@ -111,6 +114,8 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
             $scope.hotelBookable = '';
           }
         });
+      }).error(function(err) {
+
       });
   }
 
