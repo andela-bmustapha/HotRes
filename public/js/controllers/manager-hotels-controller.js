@@ -54,7 +54,7 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
     } else if (data.message === 'Hotel updated') {
       // make api call to update manager's hotel...
       apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
-      alert('Hotel update!');
+      swal("Success", "Hotel Updated.", "success");
       $('#editHotelModal').closeModal();
     }
   }
@@ -76,6 +76,8 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
     $scope.hotelAddress = hotel.address;
     $scope.hotelDescription = hotel.description;
     $scope.hotelBookable = hotel.bookable;
+    $scope.hotelPhone = hotel.phone;
+    $scope.hotelRating = hotel.rating;
 
     // open modal window
     $('#editHotelModal').openModal();
@@ -85,13 +87,13 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
   $scope.saveHotel = function(hotel) {
 
     // validate the models before saving to database..
-    if (!$scope.hotelName || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription || !$scope.hotelBookable) {
+    if (!$scope.hotelName || !$scope.hotelPhone || !$scope.hotelRating || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription || !$scope.hotelBookable) {
       $scope.hotelSaveError = 'All fields are required!'
       return;
     }
 
     // check if no change was made to models...
-    if ($scope.hotelName === hotel.name && $scope.hotelState === hotel.state && $scope.hotelCity === hotel.city && $scope.hotelAddress === hotel.address && $scope.hotelDescription === hotel.description && $scope.hotelBookable === hotel.bookable && !$scope.file) {
+    if ($scope.hotelName === hotel.name && $scope.hotelRating === hotel.rating && $scope.hotelState === hotel.state && $scope.hotelCity === hotel.city && $scope.hotelAddress === hotel.address && $scope.hotelPhone === hotel.phone && $scope.hotelDescription === hotel.description && $scope.hotelBookable === hotel.bookable && !$scope.file) {
       $scope.hotelSaveError = 'No change was made.'
       return;
     }
@@ -115,7 +117,9 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
       city: $scope.hotelCity,
       address: $scope.hotelAddress,
       description: $scope.hotelDescription,
-      bookable: $scope.hotelBookable
+      bookable: $scope.hotelBookable,
+      phone: $scope.hotelPhone,
+      rating: $scope.hotelRating
     }
 
     // check if $scope.file is available before sending to cloudinary
@@ -133,8 +137,12 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
 
   // function to view hotel reviews
   $scope.viewReviews = function(hotel) {
+    $scope.reviewReport = '';
     $('#hotelReviewModel').openModal();
     $scope.hotelReviews = hotel.reviews;
+    if ($scope.hotelReviews.length === 0) {
+      $scope.reviewReport = 'No Review';
+    }
   }
   // function to close hotel review modal
   $scope.closeViewReviewsModal = function() {
@@ -144,26 +152,36 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
   // function to delete hotel
   $scope.deleteHotel = function(hotel) {
 
-    // display a prompt to confirm delete
-    var action = confirm("Are you sure you want to delete " + hotel.name);
-    if (action !== true) {
-      return;
-    } else {
-      // make api call to delete hotel
-      apiCall.deleteHotel(managerToken, hotel._id).success(function(data) {
-        if (data.message === 'Successfully deleted') {
-          $scope.singleHotel = '';
-          alert('Hotel successfully deleted!');
-          // refresh hotel list here...
-          apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
-          $scope.singleHotel = '';
-        } else if (data.message === 'Unauthorized Access. Mismatched token.') {
-          alert(data.message);
-        } else if (data.message === 'Unauthorized Access') {
-          alert(data.message);
-        }
-      });
-    }
+    // use sweetalert to ask for confirmation
+    swal(
+      {
+        title: "Are you sure?",
+        text: hotel.name + " will be deleted permanently!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+      }, function(){
+        // make api call to delete hotel
+        apiCall.deleteHotel(managerToken, hotel._id).success(function(data) {
+          if (data.message === 'Successfully deleted') {
+            $scope.singleHotel = '';
+            swal({
+                title: "Hotel Deleted!",
+                timer: 1000,
+                showConfirmButton: false
+              });
+            // refresh hotel list here...
+            apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
+          } else if (data.message === 'Unauthorized Access. Mismatched token.') {
+            swal(data.message);
+          } else if (data.message === 'Unauthorized Access') {
+            swal(data.message);
+          }
+        });
+      }
+    );
   }
 
   // function to close edit modal box

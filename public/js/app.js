@@ -40,6 +40,12 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 
         }
       })
 
+      .state('singleHotel', {
+        url: '/hotels/{hotelId}',
+        templateUrl: '../partials/singleHotel.html',
+        controller: 'singleHotelCtrl'
+      })
+
       .state('loggedIn', {
         url: '/dashboard',
         views: {
@@ -96,7 +102,7 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 
   }])
   
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = true;
+    cfpLoadingBarProvider.includeSpinner = false;
   }])
 
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {

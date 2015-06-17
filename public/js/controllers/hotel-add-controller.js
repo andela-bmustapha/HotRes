@@ -27,7 +27,7 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
     var validated = true;
 
     // check hotel name
-    if (!$scope.hotelName || !$scope.hotelRating || !$scope.hotelBookable || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription) {
+    if (!$scope.hotelName || !$scope.hotelPhone || !$scope.hotelRating || !$scope.hotelBookable || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription) {
       $scope.hotelAddErrorMessage = 'Some fields are required';
       validated = false;
     }
@@ -73,6 +73,7 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
     $scope.hotelAddErrorMessage = '';
 
     if (!validate()) {
+      // break out of function
       return;
     }
 
@@ -88,6 +89,7 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
         pictureUrl: data.url,
         city: $scope.hotelCity,
         address: $scope.hotelAddress,
+        phone: $scope.hotelPhone,
         rating: $scope.hotelRating,
         description: $scope.hotelDescription,
         website: $scope.hotelWebsite,
@@ -97,10 +99,10 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
       // make api call to save hotel in database
       apiCall.addHotel(managerToken, requestObject).success(function(data) {
         if (data.message === 'Hotel add error') {
-          alert(data.message);
+          swal("Error!", data.message, "warning");
         } else if (data.message === 'Hotel Added') {
           $scope.cloudinaryRequest = false;
-          alert(data.message);
+          swal("Success", data.message, "success");
           // clear all models
           $scope.hotelName = '';
           $scope.hotelPictureUrl = '';
@@ -111,6 +113,7 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
           $scope.hotelDescription = '';
           $scope.hotelWebsite = '';
           $scope.hotelBookable = '';
+          $scope.hotelPhone = '';
         }
       });
     }).error(function(err) {

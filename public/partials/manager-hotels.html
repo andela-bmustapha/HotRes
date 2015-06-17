@@ -21,8 +21,7 @@
     <form class="col s12 black-text">
       <div class="row">
         <div class="input-field col s12">
-          <input id="hotelName" type="text" class="validate" data-ng-model="hotelName">
-          <label for="hotelName">Hotel Name</label>
+          <input id="hotelName" type="text" class="validate" placeholder="Hotel Name" data-ng-model="hotelName">
         </div>
         <div class="file-field input-field input-field col s12">
           <input class="file-path validate" placeholder="Hotel Image" type="text"/>
@@ -32,17 +31,18 @@
           </div>
         </div>
         <div class="input-field col s12">
-          <input id="hotelState" type="text" class="validate" data-ng-model="hotelState">
-          <label for="hotelState">State</label>
+          <input id="hotelRating" type="number" class="validate" placeholder="Rating" data-ng-model="hotelRating">
         </div>
         <div class="input-field col s12">
-          <input id="hotelCity" type="text" class="validate" data-ng-model="hotelCity">
-          <label for="hotelCity">City</label>
+          <input id="hotelState" type="text" class="validate" placeholder="State" data-ng-model="hotelState">
+        </div>
+        <div class="input-field col s12">
+          <input id="hotelCity" type="text" class="validate" placeholder="City" data-ng-model="hotelCity">
         </div>
         <div class="input-field col s12">
           <span>Available for booking?</span>
           <p>
-            <input type="radio" ng-model="hotelBookable" name="available" id="availableYes" value="yes" checked>
+            <input type="radio" ng-model="hotelBookable" name="available" id="availableYes" value="yes">
             <label for="availableYes" class="">Yes</label>
           </p>
           <p>
@@ -54,12 +54,13 @@
           <p>Spacing</p>
         </div>
         <div class="input-field col s12">
-          <textarea id="hotelAddress" class="materialize-textarea" data-ng-model="hotelAddress"></textarea>
-          <label for="hotelAddress">Full Address</label>
+          <input id="hotelPhone" type="text" class="validate" placeholder="Phone" data-ng-model="hotelPhone">
         </div>
         <div class="input-field col s12">
-          <textarea id="hotelDescription" class="materialize-textarea" data-ng-model="hotelDescription"></textarea>
-          <label for="hotelDescription">Description</label><br>
+          <input id="hotelAddress" type="text" class="validate" placeholder="Full Address" data-ng-model="hotelAddress">
+        </div>
+        <div class="input-field col s12">
+          <textarea id="hotelDescription" class="materialize-textarea" placeholder="More Information..." data-ng-model="hotelDescription"></textarea><br>
           <span ng-show="hotelSaveError" class="red-text">{{hotelSaveError}}</span>
         </div>
         <div class="input-field col s12">
@@ -105,6 +106,7 @@
         <img class="hotelImage" ng-src="{{singleHotel.pictureUrl}}"><br>
         Location: {{singleHotel.city}}, {{singleHotel.state}}.<br>
         Full Address: {{singleHotel.address}}<br>
+        Phone: {{singleHotel.phone}}<br>
         Description: {{singleHotel.description}}<br><br>
       </div>
       <div class="col s12">

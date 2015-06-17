@@ -107,15 +107,16 @@
           State: {{hotel.state}}, City: {{hotel.city}}<br>
           Full Address: {{hotel.address}} <br>
           Rating: {{hotel.rating}} Star <br>
+          Contact: {{hotel.phone}}<br>
           Description: {{hotel.description}} <br>
-          <span data-ng-show="hotel.website">Website: <a data-ng-href="{{hotel.website}}">{{hotel.name}}</a></span>
+          <span data-ng-show="hotel.website">Website: <a data-ng-href="{{hotel.website}}">{{hotel.name}}</a></span><br>
+          <!--span><a ui-sref="singleHotel({hotelId: hotel._id})" target="_blank">View Complete Profile</a></span -->
         </p>
-        <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openBookingModal(hotel)">Book</button><br>
+        <!--button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openBookingModal(hotel)">Book</button><br-->
         <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openAddReviewModal(hotel)">Add Review</button><br>
         <button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openViewReviewsModal(hotel)">View Reviews</button>
       </div>
     </div>
-
 
   </div>
 

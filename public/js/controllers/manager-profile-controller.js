@@ -73,7 +73,7 @@ app.controller('ManagerProfileCtrl', ['$scope', 'apiCall', 'logChecker', '$cooki
         }
         if (data.message === 'Manager updated!') {
           
-          alert('Profile Updated!');
+          swal("Success", "Manager Profile Updated!", "success");
           
           // clear models
           $scope.managerName = '';

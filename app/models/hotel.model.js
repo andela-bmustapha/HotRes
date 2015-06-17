@@ -15,10 +15,12 @@ var hotelSchema = new Schema({
     state: { type: String, required: true },
     city: { type: String, required: true },
     address: { type: String, required: true},
-    rating: { type: String, required: true },
+    phone: { type: String, required: true },
+    rating: { type: Number, required: true },
     description: { type: String, required: true },
     website: { type: String },
     bookable: { type: String, required: true },
+    photoGallery: [ { type: String } ],
     reviews: [ { name: { type: String }, review: { type: String } } ]
 });
 
