@@ -3,7 +3,7 @@
 
 // dashboard main controller
 
-app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookies', function($scope, apiCall, logChecker, $cookies) {
+app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookies', 'imageUploader', function($scope, apiCall, logChecker, $cookies, imageUploader) {
 
   // self invoking function to handle mobile view menu
   (function(){
@@ -38,6 +38,12 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
   // get managerId from cookies before api call
   apiCall.getManagerHotel(managerId, managerToken).success(processHotels);
 
+  $scope.fileSelected = function(files) {
+    if (files && files.length) {
+      $scope.file = files[0];
+    }
+  };
+
   // function to run when hotel is saved
   function processHotelSave(data) {
 
@@ -65,7 +71,6 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
 
     // assign current hotel details to models
     $scope.hotelName = hotel.name;
-    $scope.hotelPictureUrl = hotel.pictureUrl;
     $scope.hotelState = hotel.state;
     $scope.hotelCity = hotel.city;
     $scope.hotelAddress = hotel.address;
@@ -80,13 +85,13 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
   $scope.saveHotel = function(hotel) {
 
     // validate the models before saving to database..
-    if (!$scope.hotelName || !$scope.hotelPictureUrl || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription || !$scope.hotelBookable) {
+    if (!$scope.hotelName || !$scope.hotelState || !$scope.hotelCity || !$scope.hotelAddress || !$scope.hotelDescription || !$scope.hotelBookable) {
       $scope.hotelSaveError = 'All fields are required!'
       return;
     }
 
     // check if no change was made to models...
-    if ($scope.hotelName === hotel.name && $scope.hotelPictureUrl === hotel.pictureUrl && $scope.hotelState === hotel.state && $scope.hotelCity === hotel.city && $scope.hotelAddress === hotel.address && $scope.hotelDescription === hotel.description && $scope.hotelBookable === hotel.bookable) {
+    if ($scope.hotelName === hotel.name && $scope.hotelState === hotel.state && $scope.hotelCity === hotel.city && $scope.hotelAddress === hotel.address && $scope.hotelDescription === hotel.description && $scope.hotelBookable === hotel.bookable && !$scope.file) {
       $scope.hotelSaveError = 'No change was made.'
       return;
     }
@@ -106,7 +111,6 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
     // build up the request object
     var reqObject = {
       name: $scope.hotelName,
-      pictureUrl: $scope.hotelPictureUrl,
       state: $scope.hotelState,
       city: $scope.hotelCity,
       address: $scope.hotelAddress,
@@ -114,8 +118,17 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
       bookable: $scope.hotelBookable
     }
 
-    // make api call to save edited hotel to database
-    apiCall.saveHotel(hotel._id, managerToken, reqObject).success(processHotelSave); 
+    // check if $scope.file is available before sending to cloudinary
+    if ($scope.file) {
+      imageUploader.imageUpload($scope.file).progress(function(evt) {}).success(function(data) {
+        reqObject.pictureUrl = data.url;
+        // make api call to save edited hotel to database
+        apiCall.saveHotel(hotel._id, managerToken, reqObject).success(processHotelSave);
+      });
+    } else {
+      // make api call to save edited hotel to database
+      apiCall.saveHotel(hotel._id, managerToken, reqObject).success(processHotelSave);
+    }
   }
 
   // function to view hotel reviews
@@ -139,6 +152,7 @@ app.controller('ManagerHotelsCtrl', ['$scope', 'apiCall', 'logChecker', '$cookie
       // make api call to delete hotel
       apiCall.deleteHotel(managerToken, hotel._id).success(function(data) {
         if (data.message === 'Successfully deleted') {
+          $scope.singleHotel = '';
           alert('Hotel successfully deleted!');
           // refresh hotel list here...
           apiCall.getManagerHotel(managerId, managerToken).success(processHotels);

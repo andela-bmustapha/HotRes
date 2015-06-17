@@ -1,7 +1,7 @@
 
 // dashboard main controller
 
-app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$cookies', '$upload', function($scope, apiCall, $state, logChecker, $cookies, $upload) {
+app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$cookies', 'imageUploader', function($scope, apiCall, $state, logChecker, $cookies, imageUploader) {
 
   // self invoking function to handle mobile view menu
   (function(){
@@ -75,48 +75,46 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
       return;
     }
 
-    $upload.upload({
-      url: '/api/files',
-      file: $scope.file
-    }).progress(function(evt) {
-
+    // call the image upload service to handle image upload
+    imageUploader.imageUpload($scope.file).progress(function(evt) {
+      $scope.cloudinaryRequest = true;
     }).success(function(data) {
+      // build up the requestObject
+      var requestObject = {
+        name: $scope.hotelName,
+        managerId: managerId,
+        state: $scope.hotelState,
+        pictureUrl: data.url,
+        city: $scope.hotelCity,
+        address: $scope.hotelAddress,
+        rating: $scope.hotelRating,
+        description: $scope.hotelDescription,
+        website: $scope.hotelWebsite,
+        bookable: $scope.hotelBookable
+      }
 
-        // build up the requestObject
-        var requestObject = {
-          name: $scope.hotelName,
-          managerId: managerId,
-          state: $scope.hotelState,
-          pictureUrl: data.url,
-          city: $scope.hotelCity,
-          address: $scope.hotelAddress,
-          rating: $scope.hotelRating,
-          description: $scope.hotelDescription,
-          website: $scope.hotelWebsite,
-          bookable: $scope.hotelBookable
+      // make api call to save hotel in database
+      apiCall.addHotel(managerToken, requestObject).success(function(data) {
+        if (data.message === 'Hotel add error') {
+          alert(data.message);
+        } else if (data.message === 'Hotel Added') {
+          $scope.cloudinaryRequest = false;
+          alert(data.message);
+          // clear all models
+          $scope.hotelName = '';
+          $scope.hotelPictureUrl = '';
+          $scope.hotelState = '';
+          $scope.hotelCity = '';
+          $scope.hotelAddress = '';
+          $scope.hotelRating = '';
+          $scope.hotelDescription = '';
+          $scope.hotelWebsite = '';
+          $scope.hotelBookable = '';
         }
-
-        // make api call to save hotel in database
-        apiCall.addHotel(managerToken, requestObject).success(function(data) {
-          if (data.message === 'Hotel add error') {
-            alert(data.message);
-          } else if (data.message === 'Hotel Added') {
-            alert(data.message);
-            // clear all models
-            $scope.hotelName = '';
-            $scope.hotelPictureUrl = '';
-            $scope.hotelState = '';
-            $scope.hotelCity = '';
-            $scope.hotelAddress = '';
-            $scope.hotelRating = '';
-            $scope.hotelDescription = '';
-            $scope.hotelWebsite = '';
-            $scope.hotelBookable = '';
-          }
-        });
-      }).error(function(err) {
-
       });
+    }).error(function(err) {
+
+    });
   }
 
 }]);

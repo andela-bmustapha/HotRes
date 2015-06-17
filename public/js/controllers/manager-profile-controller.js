@@ -3,7 +3,7 @@
 
 // dashboard main controller
 
-app.controller('ManagerProfileCtrl', ['$scope', 'apiCall', 'logChecker', '$cookies', '$state', function($scope, apiCall, logChecker, $cookies, $state) {
+app.controller('ManagerProfileCtrl', ['$scope', 'apiCall', 'logChecker', '$cookies', '$state', 'imageUploader', function($scope, apiCall, logChecker, $cookies, $state, imageUploader) {
 
   // self invoking function to handle mobile view menu
   (function(){
@@ -22,28 +22,11 @@ app.controller('ManagerProfileCtrl', ['$scope', 'apiCall', 'logChecker', '$cooki
   var managerId = $cookies.get('managerId');
   var managerToken = $cookies.get('managerToken');
 
-  // function to run on successful manager edit api call
-  function processProfileEdit(data) {
-
-    // check for message from server...
-    if (data.message === 'Server Error') {
-      $scope.profileUpdateErrorMessage = 'Sorry we can\'t process your request now. Try again later';
+  $scope.fileSelected = function(files) {
+    if (files && files.length) {
+      $scope.file = files[0];
     }
-    if (data.message === 'Manager update failed') {
-      $scope.profileUpdateErrorMessage = data.message;
-    }
-    if (data.message === 'Manager updated!') {
-      
-      alert('Profile Updated!');
-      
-      // clear models
-      $scope.managerName = '';
-      $scope.managerPictureUrl = '';
-
-      // make api call to refresh dashboard details
-      apiCall.getSingleManager(managerId);
-    }
-  }
+  };
 
   // function to save edited manager's info to database
   $scope.saveManager = function() {
@@ -51,11 +34,11 @@ app.controller('ManagerProfileCtrl', ['$scope', 'apiCall', 'logChecker', '$cooki
     // clear error message each time the save button is clicked
     $scope.profileUpdateErrorMessage = '';
 
-    // check if all models are empty
-    if (!$scope.managerName && !$scope.managerPictureUrl) {
-      $scope.profileUpdateErrorMessage = 'All fields can\' be emppty';
+    if (!$scope.file && !$scope.managerName) {
+      $scope.profileUpdateErrorMessage = 'No change was made';
       return;
     }
+
 
     // if name is entered, do some simple validation checks
     if ($scope.managerName) {
@@ -76,12 +59,46 @@ app.controller('ManagerProfileCtrl', ['$scope', 'apiCall', 'logChecker', '$cooki
     if ($scope.managerName) {
       reqObject.name = $scope.managerName;
     }
-    if ($scope.managerPictureUrl) {
-      reqObject.imageUrl = $scope.managerPictureUrl;
+
+    // database save api call function
+    function saveManagerDetails() {
+      // make api call to save the info into database if all validation pass
+      apiCall.saveManager(managerId, managerToken, reqObject).success(function(data) {
+        // check for message from server...
+        if (data.message === 'Server Error') {
+          $scope.profileUpdateErrorMessage = 'Sorry we can\'t process your request now. Try again later';
+        }
+        if (data.message === 'Manager update failed') {
+          $scope.profileUpdateErrorMessage = data.message;
+        }
+        if (data.message === 'Manager updated!') {
+          
+          alert('Profile Updated!');
+          
+          // clear models
+          $scope.managerName = '';
+
+          // make api call to refresh dashboard details
+          apiCall.getSingleManager(managerId);
+        }
+      });
     }
-    
-    // make api call to save the info into database if all validation pass
-    apiCall.saveManager(managerId, managerToken, reqObject).success(processProfileEdit);
+
+    // check if file is defined...
+    if ($scope.file) {
+      // call the image upload service to handle image upload
+      imageUploader.imageUpload($scope.file).progress(function(evt) {
+        $scope.cloudinaryRequest = true;
+      }).success(function(data) {
+        $scope.cloudinaryRequest = false;
+        reqObject.imageUrl = data.url;
+        saveManagerDetails();
+      });
+    } else { // no image was selected
+      // make api call to save the info into database if all validation pass
+      saveManagerDetails();
+    }
+
   }
 
 }]);
