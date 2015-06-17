@@ -98,14 +98,28 @@
   </div>
   <p class="col s12 m4 l4" ng-show="managerHotelErrorMessage">{{managerHotelErrorMessage}}</p>
   <div ng-show="singleHotel" class="col s12 m7 l7">
-    <h4 class="center">{{singleHotel.name}}</h4>
-    <img class="hotelImage" ng-src="{{singleHotel.pictureUrl}}"><br>
-    Location: {{singleHotel.city}}, {{singleHotel.state}}.<br>
-    Full Address: {{singleHotel.address}}<br>
-    Description: {{singleHotel.description}}<br><br>
-    <button class="waves-effect waves-light btn" ng-click="editHotel(singleHotel)">Edit Hotel</button>
-    <button class="waves-effect waves-light btn" ng-click="viewReviews(singleHotel)">View Reviews</button>
-    <button class="waves-effect waves-light btn red" ng-click="deleteHotel(singleHotel)">Delete Hotel</button>
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center">{{singleHotel.name}}</h4>
+        <img class="hotelImage" ng-src="{{singleHotel.pictureUrl}}"><br>
+        Location: {{singleHotel.city}}, {{singleHotel.state}}.<br>
+        Full Address: {{singleHotel.address}}<br>
+        Description: {{singleHotel.description}}<br><br>
+      </div>
+      <div class="col s12">
+        <div class="row">
+          <div class="col s12 m12 l4 hotel-but">
+            <button class="waves-effect waves-light btn" ng-click="editHotel(singleHotel)">Edit Hotel</button>
+          </div>
+          <div class="col s12 m12 l4 hotel-but">
+            <button class="waves-effect waves-light btn" ng-click="viewReviews(singleHotel)">View Reviews</button>
+          </div>
+          <div class="col s12 m12 l4 hotel-but">
+            <button class="waves-effect waves-light btn red" ng-click="deleteHotel(singleHotel)">Delete Hotel</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
