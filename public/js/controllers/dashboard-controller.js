@@ -35,7 +35,7 @@ app.controller('DashboardMainCtrl', ['$scope', 'apiCall', '$state', 'logChecker'
   // logout function
   $scope.dashLogout = function() {
     logChecker.logout();
-    $state.go('loggedOut');
+    $state.go('loggedOut.signUpLogIn');
   };
 
 }]);
