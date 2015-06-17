@@ -43,16 +43,17 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
     // convert the bookable model to lowercase
     if($scope.hotelBookable) {
       $scope.hotelBookable = $scope.hotelBookable.toLowerCase();
-    }
-    // check for availability
-    if ($scope.hotelBookable !== 'yes') {
-      if ($scope.hotelBookable !== 'no') {
-        if (!$scope.hotelAddErrorMessage) {
-          $scope.hotelAddErrorMessage = 'Availability can either be "yes" or "no"';
-          validated = false;
+      // check for availability
+      if ($scope.hotelBookable !== 'yes') {
+        if ($scope.hotelBookable !== 'no') {
+          if (!$scope.hotelAddErrorMessage) {
+            $scope.hotelAddErrorMessage = 'Availability can either be "yes" or "no"';
+            validated = false;
+          }
         }
       }
     }
+    
 
     return validated;
   }

@@ -40,8 +40,18 @@
           <label for="hotelCity">City</label>
         </div>
         <div class="input-field col s12">
-          <input id="hotelBookable" type="text" class="validate" data-ng-model="hotelBookable">
-          <label for="hotelBookable">Bookable (Example: "yes" or "no")</label>
+          <span>Available for booking?</span>
+          <p>
+            <input type="radio" ng-model="hotelBookable" name="available" id="availableYes" value="yes" checked>
+            <label for="availableYes" class="">Yes</label>
+          </p>
+          <p>
+            <input type="radio" ng-model="hotelBookable" name="available" id="availableNo" value="no">
+            <label for="availableNo" class="">No</label>
+          </p>
+        </div>
+        <div class="input-field col s12 transparent-text">
+          <p>Spacing</p>
         </div>
         <div class="input-field col s12">
           <textarea id="hotelAddress" class="materialize-textarea" data-ng-model="hotelAddress"></textarea>
