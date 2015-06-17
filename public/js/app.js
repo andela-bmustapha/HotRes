@@ -96,9 +96,9 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 
   }])
   
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.includeSpinner = true;
   }])
 
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeBar = false;
+    cfpLoadingBarProvider.includeBar = true;
   }]);
