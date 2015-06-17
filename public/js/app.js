@@ -1,4 +1,4 @@
-var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 'angularFileUpload'])
+var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 'angularFileUpload', 'angular-loading-bar'])
 
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -93,4 +93,12 @@ var app = angular.module('hot-res', ['ui.router', 'ngCookies', 'angularMoment', 
         }
       });
 
+  }])
+  
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+  }])
+
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeBar = false;
   }]);
