@@ -1,3 +1,13 @@
+/*
+html { 
+  background: url(http://i.imgur.com/GHr12sH.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+*/
+
 body {
   font-family: 'Lora', serif;
   background-color: #fcfcfc;
@@ -147,4 +157,42 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 .hotel-but {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.hotel-add-form {
+  margin-top: 20px;
+}
+
+.footer-position {
+  z-index: 500;
+  padding-left: 240px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-overide {
+  z-index: 700;
+}
+
+.footer-padded {
+  padding: 15px;
 }

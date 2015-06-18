@@ -1,16 +1,24 @@
+<script>
+  //document.getElementById("uploadBtn").onchange = function () {
+    //console.log('Chosen');
+    //document.getElementById("uploadFile").value = this.value;
+  //};
+</script>
+
 
 
 
 <div class="row">
   
-  <h4 class="col s12 m12 l4 black-text">Add Hotel</h4>
-  <form class="col s12 m12 l6 black-text" enctype="multipart/form-data" data-ng-submit="saveHotel()">
+  <h4 class="col s12 m12 l3 black-text">Add Hotel</h4>
+
+  <form class="col s12 m12 l6 black-text pure-form hotel-add-form" enctype="multipart/form-data" data-ng-submit="saveHotel()">
     <div class="row">
       <div class="input-field col s12">
-        <input id="hotelName" type="text" class="validate" placeholder="Hotel Name" data-ng-model="hotelName">
+        Hotel Name: <input id="hotelName" type="text" placeholder="Hotel Name" data-ng-model="hotelName">
       </div>
       <div class="input-field col s12">
-        <input id="hotelRating" type="number" class="validate" placeholder="3" data-ng-model="hotelRating">
+        Star Rating: <input id="hotelRating" type="number" class="validate" placeholder="3" data-ng-model="hotelRating">
       </div>
       <div class="input-field col s12">
         <span>Available for booking?</span>
@@ -23,33 +31,30 @@
           <label for="availableNo" class="">No</label>
         </p>
       </div>
-      <div class="input-field col s12 transparent-text">
-        <p>Spacing</p>
-      </div>
-      <div class="file-field input-field input-field col s12">
-        <input class="file-path validate" type="text" placeholder="Hotel Image"/>
-        <div class="btn">
-          <span>File</span>
-          <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'" required="" />
-        </div>
+      <div class="input-field col s12">
+        Upload Picture:
+        <div class="fileUpload btn">
+          <span>Choose File</span>
+          <input id="uploadBtn" class="upload" type="file" ng-file-select="fileSelected($files)" accept="'image/*'" required="" />
+        </div>Max size - 1MB
       </div>
       <div class="input-field col s12">
-        <input id="hotelState" type="text" class="validate" placeholder="State" data-ng-model="hotelState">
+        State: <input id="hotelState" type="text" class="validate" placeholder="State" data-ng-model="hotelState">
       </div>
       <div class="input-field col s12">
-        <input id="hotelCity" type="text" class="validate" placeholder="City" data-ng-model="hotelCity">
+        City: <input id="hotelCity" type="text" class="validate" placeholder="City" data-ng-model="hotelCity">
       </div>
       <div class="input-field col s12">
-        <input id="hotelAddress" type="text" class="validate" placeholder="Full Address" data-ng-model="hotelAddress">
+        Address: <input id="hotelAddress" type="text" class="validate" placeholder="Full Address" data-ng-model="hotelAddress">
       </div>
       <div class="input-field col s12">
-        <input id="hotelPhone" type="text" class="validate" placeholder="Phone" data-ng-model="hotelPhone">
+        Phone Number: <input id="hotelPhone" type="text" class="validate" placeholder="Phone" data-ng-model="hotelPhone">
       </div>
       <div class="input-field col s12">
-        <textarea id="hotelDescription" class="materialize-textarea" placeholder="More Infomation..." data-ng-model="hotelDescription"></textarea>
+        Description: <textarea id="hotelDescription" placeholder="More Infomation..." data-ng-model="hotelDescription"></textarea>
       </div>
       <div class="input-field col s12">
-        <input id="hotelWebsite" type="text" class="validate" placeholder="Format: http://www.example.com" data-ng-model="hotelWebsite">
+        Website: <input id="hotelWebsite" type="text" class="validate" placeholder="Format: http://www.example.com" data-ng-model="hotelWebsite">
       </div>
       <p data-ng-show="hotelAddErrorMessage" class="input-field col s12 red-text bolded">
         {{hotelAddErrorMessage}}

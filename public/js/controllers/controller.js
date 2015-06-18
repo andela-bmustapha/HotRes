@@ -9,6 +9,23 @@ app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', 'logChe
   if (logChecker.isLoggedIn()) {
     $state.go('loggedIn');
   }
+
+  // scope variables for pagination
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+
+  // make api call to show four featured hotels
+  apiCall.hotelSearch('/api/hotels').success(function(data) {
+    $scope.featuredHotels = [];
+    if (data.length > 4) {
+      for (x = 0; x <= 3; x++) {
+        $scope.featuredHotels.push(data[x]);
+      }
+    } else {
+      $scope.featuredHotels = data;
+    }
+  });
+
   
   /* stand alone functions to handle
   *  api call promises...

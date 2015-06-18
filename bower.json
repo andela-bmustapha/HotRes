@@ -17,7 +17,11 @@
     "angular-ui-router": "~0.2.15",
     "angular-cookies": "~1.4.0",
     "angular-moment": "~0.10.1",
-    "sweetalert": "~1.0.1"
+    "sweetalert": "~1.0.1",
+    "cryptojslib": "~3.1.2",
+    "pure": "~0.6.0",
+    "angular-utils-pagination": "~0.8.2",
+    "angular-toastr": "~1.4.1"
   },
   "resolutions": {
     "angular": "~1.4.0"

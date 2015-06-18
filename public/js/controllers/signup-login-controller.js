@@ -100,7 +100,7 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', 'l
       // handle login success (store info in cookies and redirect to dashboard)
       $cookies.put('managerId', data.id);
       $cookies.put('managerToken', data.token);
-      $state.go('loggedIn');
+      $state.go('loggedIn.hotels');
     }
   }
 
@@ -118,6 +118,10 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', 'l
       return;  // break out of function on validation fail
     }
 
+    // encrypt password
+    var hash = CryptoJS.SHA3($scope.signupPassword);
+    var encryptedPassword = hash.toString(CryptoJS.enc.Hex);
+
     // display a loader
     $scope.signupLoader = true;
 
@@ -126,7 +130,7 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', 'l
       name:     $scope.signupName,
       username: $scope.signupUsername,
       email:    $scope.signupEmail,
-      password: $scope.signupPassword
+      password: encryptedPassword
     };
 
     // make api call with object
@@ -158,10 +162,14 @@ app.controller('SignUpLogInCtrl', ['$scope', 'apiCall', '$state', '$cookies', 'l
     // display a loader
     $scope.loginLoader = true;
 
+    // encrypt password
+    var hash = CryptoJS.SHA3($scope.loginPassword);
+    var encryptedPassword = hash.toString(CryptoJS.enc.Hex);
+
     // build up the object
     var loginObject = {
       username: $scope.loginUsername,
-      password: $scope.loginPassword
+      password: encryptedPassword
     };
 
     // make api call with object

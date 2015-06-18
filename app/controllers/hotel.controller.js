@@ -67,7 +67,7 @@ module.exports = {
         if (hotels) {
           res.json(hotels);
         }
-      }).limit(3);
+      });
     }
   },
 

@@ -77,6 +77,12 @@ app.controller('addHotelCtrl', ['$scope', 'apiCall', '$state', 'logChecker', '$c
       return;
     }
 
+    // check the size of the file uploaded
+    if ($scope.file.size > 1000000) {
+      swal('Error!', 'File Size Limit Exceeded: Maximum image size is 1MB', 'warning');
+      return;
+    }
+
     // call the image upload service to handle image upload
     imageUploader.imageUpload($scope.file).progress(function(evt) {
       $scope.cloudinaryRequest = true;

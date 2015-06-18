@@ -7,21 +7,20 @@
   <div class="col s12 m12 l8">
     <div class="row">
       <h4 class="col s12 m12 l12 black-text">Profile Edit</h4>
-      <form class="col s12 m12 l12 black-text">
+      <form class="col s12 m12 l12 black-text pure-form hotel-add-form">
         <div class="row">
           <div class="input-field col s12">
-            <input id="managerName" type="text" class="validate" data-ng-model="managerName">
-            <label for="managerName">Name</label>
-          </div>
-          <div class="file-field input-field input-field col s12">
-            <input class="file-path validate" type="text" placeholder="Image"/>
-            <div class="btn">
-              <span>File</span>
-              <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'" />
-            </div>
+            Name: <input id="managerName" type="text" class="validate" placeholder="Name" data-ng-model="managerName">
           </div>
           <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" type="submit" name="action" data-ng-click="saveManager()">
+            Upload Picture:
+            <div class="fileUpload btn">
+              <span>Choose File</span>
+              <input id="uploadBtn" class="upload" type="file" ng-file-select="fileSelected($files)" accept="'image/*'" />
+            </div>Max size - 1MB
+          </div>
+          <div class="input-field col s12">
+            <button class="btn waves-effect waves-light green" type="submit" name="action" data-ng-click="saveManager()">
               Save
             </button> <br>
             <p data-ng-show="profileUpdateErrorMessage" class="red-text bolded">{{profileUpdateErrorMessage}}</p>

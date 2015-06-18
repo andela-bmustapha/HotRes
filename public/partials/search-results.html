@@ -87,11 +87,11 @@
 
 
 
-<div class="row center result-row"><h5 class="bold">Search Results</h5></div>
+<div class="row center result-row"><h5 class="bold">Search Results - Page {{currentPage}}</h5></div>
 
 <div class="row" class="result-row">
 
-  <div class="col s12 m4 l4" ng-repeat="hotel in apiData">
+  <div class="col s12 m4 l4" dir-paginate="hotel in apiData | itemsPerPage: pageSize" current-page="currentPage">
 
 
     <div class="card">
@@ -104,12 +104,12 @@
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">{{hotel.name}} <i class="mdi-navigation-close right"></i></span>
         <p>
-          State: {{hotel.state}}, City: {{hotel.city}}<br>
-          Full Address: {{hotel.address}} <br>
-          Rating: {{hotel.rating}} Star <br>
-          Contact: {{hotel.phone}}<br>
-          Description: {{hotel.description}} <br>
-          <span data-ng-show="hotel.website">Website: <a data-ng-href="{{hotel.website}}">{{hotel.name}}</a></span><br>
+          <i class="mdi-action-home"></i>  {{hotel.address}} <br>
+          <i class="mdi-communication-location-on"></i> {{hotel.state}}, City: {{hotel.city}}<br>
+          <i class="mdi-action-grade"></i> {{hotel.rating}} Star <br>
+          <i class="mdi-communication-call"></i> {{hotel.phone}}<br>
+          <i class="mdi-editor-format-list-bulleted"></i> {{hotel.description}} <br>
+          <span data-ng-show="hotel.website"><i class="mdi-social-public"></i> <a data-ng-href="{{hotel.website}}">{{hotel.name}}</a></span><br>
           <!--span><a ui-sref="singleHotel({hotelId: hotel._id})" target="_blank">View Complete Profile</a></span -->
         </p>
         <!--button class="btn waves-effect waves-light green hotel-buttons" data-ng-click="openBookingModal(hotel)">Book</button><br-->
@@ -118,6 +118,10 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="col s12">
+    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="libs/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
   </div>
 
 </div>

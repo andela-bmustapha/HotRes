@@ -75,21 +75,17 @@
   <div class="col s12 m12 black-text result-row">
     <div class="row">
       <div class="col s12 m12"><h5 class="center bold">Featured Hotels</h5></div>
-      <div class="col s12 m3 result-row">
-        <h6 class="center bold">Sheraton Hotel</h6><br>
-        <img class="hotelImage" src="img/sheraton.jpg">
+      <!--div class="col s12 m12">{{currentPage}}</div-->
+      <div class="col s12 m3 result-row" dir-paginate="hotel in featuredHotels | itemsPerPage: pageSize" current-page="currentPage">
+        <div class="row">
+          <div class="col s12"><h6 class="center bold">{{hotel.name}}</h6></div>
+          <div class="col s12"><img class="hotelImage" ng-src="{{hotel.pictureUrl}}"></div>
+          <div class="col s12"><span class="left"><i class="mdi-action-home"></i> {{hotel.address}}</span></div>
+          <div class="col s12"><span class="left"><i class="mdi-communication-call"></i> {{hotel.phone}}</span>
+        </div>
       </div>
-      <div class="col s12 m3 result-row">
-        <h6 class="center bold">Rita Lori Hotel</h6><br>
-        <img class="hotelImage" src="img/rita.jpg">
-      </div>
-      <div class="col s12 m3 result-row">
-        <h6 class="center bold">Nicon Hotel</h6><br>
-        <img class="hotelImage" src="img/nicon.gif">
-      </div>
-      <div class="col s12 m3 result-row">
-        <h6 class="center bold">Green Legacy Resort</h6><br>
-        <img class="hotelImage" src="img/green.jpg">
+      <div class="col s12 m12">
+        <!--dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="libs/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls-->
       </div>
     </div>
   </div>

@@ -1,8 +1,21 @@
 
 // hotel search controller
 
-app.controller('hotelSearchCtrl', ['$scope', 'apiCall', function($scope, apiCall) {
+app.controller('hotelSearchCtrl', ['$rootScope', '$scope', 'apiCall', 'logChecker', '$state', function($rootScope, $scope, apiCall, logChecker, $state) {
 
+
+  // check logged in state
+  if (logChecker.isLoggedIn()) {
+    $state.go('loggedIn');
+  }
+
+  if (!$rootScope.apiData) {
+    $state.go('loggedOut');
+  }
+
+  // scope variables for pagination
+  $scope.currentPage = 1;
+  $scope.pageSize = 20;
 
   // function to save booking infomation to database
   $scope.makeReservation = function() {

@@ -9,6 +9,8 @@
   <link type="text/css" rel="stylesheet" href="libs/materialize/dist/css/materialize.min.css" media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="libs/angular-loading-bar/build/loading-bar.min.css">
   <link rel="stylesheet" type="text/css" href="libs/sweetalert/dist/sweetalert.css">
+  <link rel="stylesheet" type="text/css" href="libs/pure/pure-min.css">
+  <link rel="stylesheet" type="text/css" href="libs/angular-toastr/dist/angular-toastr.css" />
   <link rel="stylesheet" type="text/css" href="css/main.css">
 
   <!--Let browser know website is optimized for mobile-->
@@ -18,8 +20,8 @@
 
   <div ui-view></div>
 
-  <footer class="page-footer grey">
-    <div class="container">
+  <div class="page-footer grey footer-position">
+    <!--div class="container">
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">About Hot-Res</h5>
@@ -28,14 +30,14 @@
           </p>
         </div>
       </div>
-    </div>
+    </div-->
     <div class="footer-copyright">
       <div class="container">
-        © 2015 <a href="http://www.andela.co" class="white-text" target="_blank">Andela</a> All Rights Reserved.
-        <span class="right">Made with <i class="mdi-action-favorite-outline"></i> by <a class="white-text" target="_blank" href="https://www.github.com/andela-bmustapha">Mustapha Babatunde</a> from Lagos, Nigeria</span>
+        <span class="right footer-padded">Made with <i class="mdi-action-favorite-outline"></i> by <a class="white-text" target="_blank" href="https://www.github.com/andela-bmustapha">Mustapha Babatunde</a> from Lagos, Nigeria</span>
       </div>
     </div>
-  </footer>
+  </div>
+
   <!--Import angular and other modules-->
   <script src="libs/angular/angular.min.js"></script>
   <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -46,6 +48,9 @@
   <script src="libs/angular-file-upload/dist/angular-file-upload.js"></script>
   <script src="libs/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="libs/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="libs/cryptojslib/rollups/sha3.js"></script>
+  <script src="libs/angular-utils-pagination/dirPagination.js"></script>
+  <script src="libs/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services/resApiService.js"></script>
   <script src="js/services/loggedInService.js"></script>
