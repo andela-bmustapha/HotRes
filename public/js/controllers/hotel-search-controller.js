@@ -86,7 +86,7 @@ app.controller('hotelSearchCtrl', ['$rootScope', '$scope', 'apiCall', 'logChecke
       $scope.name = '';
       $scope.comment = '';
       // review added success modal to be called from here...
-      alert('Review sent');
+      swal("Success", "Review Sent!", "success");
       $('#addReviews').closeModal();
     });
   };
