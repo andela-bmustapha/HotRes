@@ -8,9 +8,15 @@ html {
 }
 */
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
   font-family: 'Lora', serif;
   background-color: #fcfcfc;
+  margin: 0 0 100px;
 }
 
 .dash-logout {
@@ -108,7 +114,7 @@ body {
   border-radius: 80px;
 }
 
-header, main, footer, #logged-in-nav {
+header, main, #logged-in-nav {
   padding-left: 240px;
 }
 
@@ -194,5 +200,13 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 }
 
 .footer-padded {
-  padding: 15px;
+  padding-top: 20px
+}
+
+.footer {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  height: 100px !important;
+  width: 100% !important;
 }
