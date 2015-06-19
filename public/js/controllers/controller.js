@@ -16,6 +16,12 @@ app.controller('MainCtrl', ['$rootScope', '$scope', 'apiCall', '$state', 'logChe
 
   // make api call to show four featured hotels
   apiCall.hotelSearch('/api/hotels').success(function(data) {
+    $scope.numberOfHotels = data.length;
+    if ($scope.numberOfHotels > 1) {
+      $scope.hotelTense = 'hotels';
+    } else {
+      $scope.hotelTense = 'hotel';
+    }
     $scope.featuredHotels = [];
     if (data.length > 4) {
       for (x = 0; x <= 3; x++) {

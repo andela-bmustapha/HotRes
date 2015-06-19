@@ -125,7 +125,7 @@ header, main, #logged-in-nav {
 }
 
 .nav-bar-back {
-  background-color: rgba(38, 50, 56, .7);
+  background-color: rgba(0, 150, 136, .7);
 }
 
 .icon-info {
@@ -189,10 +189,7 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 
 .footer-position {
   z-index: 500;
-  padding-left: 240px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  /*padding-left: 240px;*/
 }
 
 .footer-overide {
@@ -200,13 +197,20 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 }
 
 .footer-padded {
-  padding-top: 20px
+  margin-top: 20px;
 }
 
 .footer {
+  font-size: 18px;
+  font-family: 'Vollkorn', serif !important;
+  background-color: rgba(182, 182, 182, .7) !important;
   position: absolute !important;
   left: 0 !important;
   bottom: 0 !important;
-  height: 100px !important;
+  /* height: 100px !important; */
   width: 100% !important;
+}
+
+.icons-strip {
+  background-color: #B2DFDB;
 }
