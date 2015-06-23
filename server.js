@@ -25,6 +25,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/public'));
 
+app.use(require('prerender-node'));
+
 app.use('/api', router);
 routes(router);
 
